@@ -24,7 +24,11 @@ class Contact
 	void	set_secret(std::string secret);
 
 	//Getters
-	
+	int			get_index();
+	std::string	get_firstname();
+	std::string	get_lastname();
+	std::string	get_nickname();
+	std::string	get_secret();
 	~Contact(void);
 
 };

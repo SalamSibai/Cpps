@@ -41,6 +41,34 @@ void	Contact::set_secret(std::string secret)
 }
 
 /**
+ * GETTERS IMPEMENTATION
+ */
+
+int	Contact::get_index()
+{
+	return (this->index);
+}
+
+std::string	Contact::get_firstname()
+{
+	return (this->first_name);
+}
+
+std::string	Contact::get_lastname()
+{
+	return (this->last_name);
+}
+
+std::string	Contact::get_nickname()
+{
+	return (this->nickname);
+}
+
+std::string	Contact::get_secret()
+{
+	return (this->exposed_seceret);
+}
+/**
  * @brief Destroy the Contact object
  */
 Contact::~Contact (void)
