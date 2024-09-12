@@ -2,10 +2,31 @@
 #ifndef CONTACT_H
 # define CONTACT_H
 
+#include <string>
+
 class Contact
 {
-    Contact(void);
-    ~Contact(void);
+	private:
+	int			index;
+	std::string	first_name;
+	std::string	last_name;
+	std::string nickname;
+	std::string	exposed_seceret;
+
+	public:
+	Contact();
+
+	//setters
+	void	set_index(int idx);
+	void	set_firstname(std::string fn);
+	void	set_lastname(std::string ln);
+	void	set_nickname(std::string nn);
+	void	set_secret(std::string secret);
+
+	//Getters
+	
+	~Contact(void);
+
 };
 
 #endif
