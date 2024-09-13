@@ -6,33 +6,30 @@
  */
 Contact::Contact()
 {
-	set_index(0);
-	set_firstname("fn");
-	set_lastname("ln");
-	set_nickname("nn");
+	return ;
 }
 
 /**
  * SETTERS IMPLEMENTATION
  */
-void	Contact::set_index(int idx)
+void	Contact::set_firstname(std::string first_name)
 {
-	this->index = idx;
+	this->first_name = first_name;
 }
 
-void	Contact::set_firstname(std::string fn)
+void	Contact::set_lastname(std::string last_name)
 {
-	this->first_name = fn;
+	this->last_name = last_name;
 }
 
-void	Contact::set_lastname(std::string ln)
+void	Contact::set_nickname(std::string nickname)
 {
-	this->last_name = ln;
+	this->nickname = nickname;
 }
 
-void	Contact::set_nickname(std::string nn)
+void	Contact::set_phone_number(std::string number)
 {
-	this->nickname = nn;
+	this->phone_number = number;
 }
 
 void	Contact::set_secret(std::string secret)
@@ -43,12 +40,6 @@ void	Contact::set_secret(std::string secret)
 /**
  * GETTERS IMPEMENTATION
  */
-
-int	Contact::get_index()
-{
-	return (this->index);
-}
-
 std::string	Contact::get_firstname()
 {
 	return (this->first_name);
@@ -62,6 +53,11 @@ std::string	Contact::get_lastname()
 std::string	Contact::get_nickname()
 {
 	return (this->nickname);
+}
+
+std::string Contact::get_phone_number()
+{
+	return (this->phone_number);
 }
 
 std::string	Contact::get_secret()
