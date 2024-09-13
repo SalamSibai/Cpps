@@ -15,7 +15,7 @@ class PhoneBook
 	public:
 	PhoneBook();
 	void	ft_add();
-	Contact	ft_search(int idx);
+	Contact	ft_search();
 	void	ft_exit();
 	~PhoneBook();
 };
