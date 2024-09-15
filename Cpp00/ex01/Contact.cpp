@@ -4,7 +4,7 @@
 /**
  * @brief Construct a new Contact:: Contact object
  */
-Contact::Contact()
+Contact::Contact(void)
 {
 	return ;
 }

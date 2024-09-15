@@ -1,8 +1,5 @@
 
-#include <iostream>
-#include <cstring>
 #include "PhoneBook.hpp"
-//split a parsing file on its own
 
 int    check_command(std::string command)
 {
@@ -26,7 +23,6 @@ int main()
 	int			cmd_idx;
 
 	std::cout << "Welcome to my phonebook!" << std::endl;
-	std::cout << "What would you like to do today?" << std::endl;
 	do
 	{
 		std::cout << "What would you like to do today?" << std::endl;
@@ -37,7 +33,7 @@ int main()
 			std::cout << "Incorrect command! please try again." << std::endl;
 			continue;
 		}
-		else if (cmd_idx == 1)
+		else if (cmd_idx == 1) 
 			phonebook.add_contact();
 		else if (cmd_idx == 2)
 			phonebook.contact_search();

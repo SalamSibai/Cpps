@@ -14,7 +14,7 @@ class Contact
 	std::string	exposed_seceret;
 
 	public:
- 
+	Contact(void);
 	//setters
 	void	set_firstname(std::string fn);
 	void	set_lastname(std::string ln);

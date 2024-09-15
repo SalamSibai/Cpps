@@ -56,9 +56,10 @@ void PhoneBook::contact_search()
 	std::cin >> idx;
 	if (!search_error_handler(idx))
 		std::cout << "Failed to find contact." << std::endl;
+	else
+		get_contact(idx);
 	//else
 	//retrieve contact information
-
 }
 
 PhoneBook::~PhoneBook (void)
