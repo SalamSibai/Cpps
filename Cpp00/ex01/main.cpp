@@ -15,7 +15,6 @@ int    check_command(std::string command)
 	return (0);
 }
 
-
 int main()
 {
 	std::string	command;
@@ -25,15 +24,21 @@ int main()
 	std::cout << "Welcome to my phonebook!" << std::endl;
 	do
 	{
+		if (std::cin.eof())
+		{
+			std::cout << std::endl;
+			break ;
+		}
 		std::cout << "What would you like to do today?" << std::endl;
 		std::getline(std::cin, command);
+		// std::cin >> command;
 		cmd_idx = check_command(command);
 		if (!cmd_idx)
 		{
 			std::cout << "Incorrect command! please try again." << std::endl;
 			continue;
 		}
-		else if (cmd_idx == 1) 
+		 if (command.compare("ADD")) 
 			phonebook.add_contact();
 		else if (cmd_idx == 2)
 			phonebook.contact_search();
