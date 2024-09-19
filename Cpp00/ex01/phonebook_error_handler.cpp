@@ -1,37 +1,22 @@
 
 #include "PhoneBook.hpp"
-#include <stdio.h>
+
 bool	alphabetical_string(std::string str)
 {
-	const char* c_str;
-
-	c_str = str.c_str();
-	while (c_str)
+	for (size_t i = 0; i < str.length(); i++)
 	{
-		if (*c_str != '\n')
-			break ;
-		if (!isalpha(*c_str))
-		{
-			printf("%c\n", *c_str);
-			return (false);
-		}
-		c_str ++;
+		if (!std::isalpha(str[i]) && str[i] != ' ')
+			return false;
 	}
 	return (true);
 }
 
 bool	numerical_string(std::string str)
 {
-	const char* c_str;
-
-	c_str = str.c_str();
-	while (c_str)
+	for (size_t i = 0; i < str.length(); i++)
 	{
-		if (*c_str != '\n')
-			break ;
-		if(!isdigit(*c_str))
-			return (false);
-		c_str ++;
+		if (!std::isdigit(str[i]))
+			return false;
 	}
 	return (true);
 }
@@ -60,16 +45,4 @@ bool	PhoneBook::add_error_handler(std::string input, std::string input_type, boo
 		}
 	}
 	return (true);
-}
-
-bool	PhoneBook::search_error_handler(int idx)
-{
-	if (idx > 7)
-	{
-		std::cout << "Number entered incorrect!" << std::endl;
-		return (false);
-	}
-	return (true);
-	//check if this contact has been filled or not??
-	//if (this->contacts[idx])
 }

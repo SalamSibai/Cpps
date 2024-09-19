@@ -1,12 +1,12 @@
 
 NAME = phonebook
 
-FILES = main.cpp 				\
-		Contact.cpp 			\
-		PhoneBook.cpp			\
-		phonebook_utils.cpp		\
-		add_contact_utils.cpp	\
-		search_utils.cpp		\
+FILES = main.cpp 						\
+		Contact.cpp 					\
+		PhoneBook.cpp					\
+		phonebook_error_handler.cpp		\
+		add_contact_utils.cpp			\
+		search_utils.cpp				\
 
 CXX = c++
 

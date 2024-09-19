@@ -47,19 +47,16 @@ void	PhoneBook::add_contact()
 	}
 }
 
+/**
+ * @brief shows list of all saved elements
+ * 
+ */
 void PhoneBook::contact_search()
 {
-	int	idx;
-
-	idx = 0;
-	std::cout << "Enter index you're searching for:" << std::endl;
-	std::cin >> idx;
-	if (!search_error_handler(idx))
-		std::cout << "Failed to find contact." << std::endl;
+	if (contact_count == 0)
+		std::cout << "NO CONTACTS HAVE BEEN SAVED!" << std::endl;
 	else
-		get_contact(idx);
-	//else
-	//retrieve contact information
+		get_contacts();
 }
 
 PhoneBook::~PhoneBook (void)

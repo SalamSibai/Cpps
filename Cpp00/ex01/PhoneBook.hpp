@@ -6,6 +6,7 @@
 #include <iostream>
 #include <string>
 #include <cstring>
+#include <cctype>
 #include "Contact.hpp"
 
 /**
@@ -35,8 +36,7 @@ class PhoneBook
 				Utilities			
 	*******************************/
 	bool	add_error_handler(std::string input, std::string input_type, bool alpha);
-	bool	search_error_handler(int idx);
-	void	get_contact(int idx);
+	void	get_contacts();
 	bool	enter_contact_info(Contact *contact);
 	bool	enter_first_name(Contact *contact);
 	bool	enter_last_name(Contact *contact);

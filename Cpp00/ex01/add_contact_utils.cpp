@@ -1,7 +1,6 @@
 
 #include "PhoneBook.hpp"
 
-
 bool	PhoneBook::enter_first_name(Contact *contact)
 {
 	std::string	line;
