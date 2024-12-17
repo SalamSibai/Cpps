@@ -12,27 +12,27 @@ Contact::Contact(void)
 /**
  * SETTERS IMPLEMENTATION
  */
-void	Contact::set_firstname(std::string first_name)
+void	Contact::setFirstName(std::string first_name)
 {
 	this->first_name = first_name;
 }
 
-void	Contact::set_lastname(std::string last_name)
+void	Contact::setLastName(std::string last_name)
 {
 	this->last_name = last_name;
 }
 
-void	Contact::set_nickname(std::string nickname)
+void	Contact::setNickname(std::string nickname)
 {
 	this->nickname = nickname;
 }
 
-void	Contact::set_phone_number(std::string number)
+void	Contact::setPhoneNumber(std::string number)
 {
 	this->phone_number = number;
 }
 
-void	Contact::set_secret(std::string secret)
+void	Contact::setSecret(std::string secret)
 {
 	this->exposed_seceret = secret;
 }
@@ -40,33 +40,45 @@ void	Contact::set_secret(std::string secret)
 /**
  * GETTERS IMPEMENTATION
  */
-std::string	Contact::get_firstname()
+std::string	Contact::getFirstname() const
 {
 	return (this->first_name);
 }
 
-std::string	Contact::get_lastname()
+std::string	Contact::getLastname() const
 {
 	return (this->last_name);
 }
 
-std::string	Contact::get_nickname()
+std::string	Contact::getNickname() const
 {
 	return (this->nickname);
 }
 
-std::string Contact::get_phone_number()
+std::string Contact::getPhoneNumber() const
 {
 	return (this->phone_number);
 }
 
-std::string	Contact::get_secret()
+std::string	Contact::getSecret() const
 {
 	return (this->exposed_seceret);
 }
 /**
  * @brief Destroy the Contact object
  */
+
+Contact& Contact::operator=(const Contact& rhs)
+{
+	this->first_name = rhs.getFirstname();
+	this->last_name = rhs.getLastname();
+	this->nickname = rhs.getNickname();
+	this->phone_number = rhs.getPhoneNumber();
+	this->exposed_seceret = rhs.getSecret();
+
+	return (*this);
+}
+
 Contact::~Contact (void)
 {
 	return ;

@@ -8,22 +8,25 @@
  */
 PhoneBook::PhoneBook() : contact_count(0)
 {
-	return ;
+	std::cout << "Welcome to my phonebook!" << std::endl;
 }
 
-bool	PhoneBook::enter_contact_info(Contact *contact)
+void	PhoneBook::enterContactInfo()
 {
-	if (!enter_first_name(contact))
-		return (false);
-	if (!enter_last_name(contact))
-		return (false);
-	if (!enter_nickname(contact))
-		return (false);
-	if (!enter_number(contact))
-		return (false);
-	if (!enter_secret(contact))
-		return (false);
-	return (true);
+	Contact temp;
+
+	if (!enterFirstName(&temp))
+		return ;
+	if (!enterLastName(&temp))
+		return ;
+	if (!enterNickname(&temp))
+		return ;
+	if (!enterNumber(&temp))
+		return ;
+	if (!enterSecret(&temp))
+		return ;
+
+	addContact(temp);
 }
 
 /**
@@ -33,30 +36,24 @@ bool	PhoneBook::enter_contact_info(Contact *contact)
  * in case anything failed, this makes sure we reset 
  * that contact entry to default
  */
-void	PhoneBook::add_contact()
+void	PhoneBook::addContact(Contact cont)
 {
-	this->contacts[contact_count] = Contact();
-	if (!enter_contact_info(&this->contacts[contact_count]))
-		this->contacts[contact_count] = Contact();
-	else
-	{
-		contact_count ++;
-		if (contact_count == 8)
-			contact_count = 0;
-		std::cout << "Contact added successfully!" << std::endl;
-	}
+	this->contacts[contact_count] = cont;
+	this->contact_count ++;
+	if (this->contact_count == 8)
+		this->contact_count = 0;
 }
 
 /**
  * @brief shows list of all saved elements
  * 
  */
-void PhoneBook::contact_search()
+void PhoneBook::contactSearch()
 {
 	if (contact_count == 0)
 		std::cout << "NO CONTACTS HAVE BEEN SAVED!" << std::endl;
 	else
-		get_contacts();
+		getContacts();
 }
 
 PhoneBook::~PhoneBook (void)

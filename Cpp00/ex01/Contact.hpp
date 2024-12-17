@@ -16,18 +16,22 @@ class Contact
 	public:
 	Contact(void);
 	//setters
-	void	set_firstname(std::string fn);
-	void	set_lastname(std::string ln);
-	void	set_nickname(std::string nn);
-	void	set_phone_number(std::string pn);
-	void	set_secret(std::string secret);
+	void	setFirstName(std::string fn);
+	void	setLastName(std::string ln);
+	void	setNickname(std::string nn);
+	void	setPhoneNumber(std::string pn);
+	void	setSecret(std::string secret);
 
 	//Getters
-	std::string	get_firstname();
-	std::string	get_lastname();
-	std::string	get_nickname();
-	std::string	get_phone_number();
-	std::string	get_secret();
+	std::string	getFirstname() const;
+	std::string	getLastname() const;
+	std::string	getNickname() const;
+	std::string	getPhoneNumber() const;
+	std::string	getSecret() const;
+
+	//operator overloading:
+	Contact& operator=(const Contact& rhs);
+
 	~Contact(void);
 
 };

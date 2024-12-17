@@ -2,7 +2,6 @@
 #ifndef PhoneBook_H
 # define PhoneBook_H
 
-
 #include <iostream>
 #include <string>
 #include <cstring>
@@ -29,20 +28,23 @@ class PhoneBook
 
 	public:
 	PhoneBook();
-	void	add_contact();
-	void	contact_search();
+	void	addContact(Contact cont);
+	void	contactSearch();
 
 	/*******************************
 				Utilities			
 	*******************************/
-	bool	add_error_handler(std::string input, std::string input_type, bool alpha);
-	void	get_contacts();
-	bool	enter_contact_info(Contact *contact);
-	bool	enter_first_name(Contact *contact);
-	bool	enter_last_name(Contact *contact);
-	bool	enter_nickname(Contact *contact);
-	bool	enter_secret(Contact *contact);
-	bool	enter_number(Contact *contact);
+	bool	addErrorHandler(std::string input, std::string input_type, bool alpha);
+	void	getContacts();
+	void	enterContactInfo();
+	bool	enterFirstName(Contact *contact);
+	bool	enterLastName(Contact *contact);
+	bool	enterNickname(Contact *contact);
+	bool	enterSecret(Contact *contact);
+	bool	enterNumber(Contact *contact);
+	void	tableLayout();
+	std::string resizeContent(std::string const str, unsigned int len);
+	bool	stringType(std::string str, bool alpha);
 	~PhoneBook(void);
 };
 
