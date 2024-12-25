@@ -1,85 +1,85 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Contact.cpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/23 12:33:52 by ssibai            #+#    #+#             */
+/*   Updated: 2024/12/23 14:49:33 by ssibai           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "Contact.hpp"
+#include	"Contact.h"
 
-/**
- * @brief Construct a new Contact:: Contact object
- */
 Contact::Contact(void)
 {
 	return ;
 }
-
-/**
- * SETTERS IMPLEMENTATION
- */
-void	Contact::setFirstName(std::string first_name)
+Contact::~Contact(void)
 {
-	this->first_name = first_name;
+	return ;
 }
 
-void	Contact::setLastName(std::string last_name)
+Contact& Contact::operator=(const Contact& rhs)
 {
-	this->last_name = last_name;
+	if (this != &rhs)
+	{
+		first_name = rhs.first_name;
+		last_name = rhs.last_name;
+		nickname = rhs.nickname;
+		phone_number = rhs.phone_number;
+		exposed_seceret = rhs.exposed_seceret;
+	}
+	return (*this);
 }
 
-void	Contact::setNickname(std::string nickname)
+void	Contact::setFirstName(std::string fn)
 {
-	this->nickname = nickname;
+	first_name = fn;
 }
 
-void	Contact::setPhoneNumber(std::string number)
+void	Contact::setLastName(std::string ln)
 {
-	this->phone_number = number;
+	last_name = ln;
+}
+
+void	Contact::setNickname(std::string nn)
+{
+	nickname = nn;
+}
+
+void	Contact::setPhoneNumber(std::string phone)
+{
+	phone_number = phone;
 }
 
 void	Contact::setSecret(std::string secret)
 {
-	this->exposed_seceret = secret;
+	exposed_seceret = secret;
 }
 
-/**
- * GETTERS IMPEMENTATION
- */
 std::string	Contact::getFirstname() const
 {
-	return (this->first_name);
+	return first_name;
 }
 
 std::string	Contact::getLastname() const
 {
-	return (this->last_name);
+	return last_name;
 }
 
 std::string	Contact::getNickname() const
 {
-	return (this->nickname);
+	return nickname;
 }
 
-std::string Contact::getPhoneNumber() const
+std::string	Contact::getPhoneNumber() const
 {
-	return (this->phone_number);
+	return phone_number;
 }
 
-std::string	Contact::getSecret() const
+std::string Contact::getSecret() const
 {
-	return (this->exposed_seceret);
-}
-/**
- * @brief Destroy the Contact object
- */
-
-Contact& Contact::operator=(const Contact& rhs)
-{
-	this->first_name = rhs.getFirstname();
-	this->last_name = rhs.getLastname();
-	this->nickname = rhs.getNickname();
-	this->phone_number = rhs.getPhoneNumber();
-	this->exposed_seceret = rhs.getSecret();
-
-	return (*this);
-}
-
-Contact::~Contact (void)
-{
-	return ;
+	return exposed_seceret;
 }

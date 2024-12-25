@@ -1,33 +1,42 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/12/23 14:19:51 by ssibai            #+#    #+#              #
+#    Updated: 2024/12/23 14:22:11 by ssibai           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 
 NAME = phonebook
 
 FILES = main.cpp 						\
 		Contact.cpp 					\
-		PhoneBook.cpp					\
-		phonebook_error_handler.cpp		\
-		add_contact_utils.cpp			\
-		search_utils.cpp				\
+		PhoneBook.cpp
 
-CXX = c++
+CXX		=	c++
 
-CXXFLAGS = -Wall -Werror -Wextra -std=c++98
+CXXFLAGS=	-Wall -Wextra -Werror -std=c++98
 
-OBJS = $(FILES:.cpp=.o)
+OBJS	=	$(FILES:.cpp=.o)
 
 .cpp.o:
-	${CXX} ${CXXFLAGS} -c $< -o ${<:.cpp=.o}
+			$(CXX) $(CXXFLAGS) -c $< -o ${<:.cpp=.o}
 
-all:	$(NAME)
+all: 		$(NAME)
 
-$(NAME)	: $(OBJS)
+$(NAME):	$(OBJS)
 			$(CXX) $(OBJS) $(CXXFLAGS) -o $(NAME)
 
 clean:
-	rm -f $(OBJS)
+			/bin/rm -f $(OBJS)
 
-fclean:	clean
-	rm -f $(NAME)
+fclean:		clean
+			/bin/rm -f $(NAME)
 
-re:	fclean all
+re:			fclean all
 
-.PHONY:	all clean fclean re
+.PHONY:		all clean fclean re bonus

@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/23 12:53:01 by ssibai            #+#    #+#             */
+/*   Updated: 2024/12/23 14:50:50 by ssibai           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "PhoneBook.hpp"
+#include <iostream>
+#include "PhoneBook.h"
 
 int main()
 {
@@ -9,16 +21,15 @@ int main()
 	do
 	{
 		std::cout << "What would you like to do today?" << std::endl;
-		std::cin >> command;
-		if (std::cin.eof())
+		if (! std::getline(std::cin, command))
 		{
 			std::cout << std::endl;
 			break ;
 		}
-		else if (command == "ADD") 
-			phonebook.enterContactInfo();
+		else if (command == "ADD")
+			phonebook.enterInfo();
 		else if (command == "SEARCH")
-			phonebook.contactSearch();
+			phonebook.search();
 		else if (command == "EXIT")
 		{
 			std::cout << "Thank you!" << std::endl;

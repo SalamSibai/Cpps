@@ -1,62 +1,230 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/23 13:00:07 by ssibai            #+#    #+#             */
+/*   Updated: 2024/12/25 15:25:08 by ssibai           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "PhoneBook.hpp"
+#include "PhoneBook.h"
 
-/**
- * @brief Construct a new Phone Book:: Phone Book object
- * 
- * Also: contact_count(0) initializes contact_count to 0 [initializer list]
- */
-PhoneBook::PhoneBook() : contact_count(0)
+PhoneBook::PhoneBook()
 {
-	std::cout << "Welcome to my phonebook!" << std::endl;
+	contact_count = 0;
+}
+PhoneBook::~PhoneBook()
+{
+	return ;
 }
 
-void	PhoneBook::enterContactInfo()
+///////////////////////////////////////////////////////////////////////////////
+//  								ADD CONTACT								 //
+///////////////////////////////////////////////////////////////////////////////
+
+void	PhoneBook::enterInfo()
 {
-	Contact temp;
-
-	if (!enterFirstName(&temp))
+	if (!enterFirstName())
 		return ;
-	if (!enterLastName(&temp))
+	if (!enterLastName())
 		return ;
-	if (!enterNickname(&temp))
+	if (!enterNickname())
 		return ;
-	if (!enterNumber(&temp))
+	if (!enterPhoneNum())
 		return ;
-	if (!enterSecret(&temp))
+	if (!enterSecret())
 		return ;
-
-	addContact(temp);
+	add();
 }
 
-/**
- * @brief adds a contact to the phonebook
- * 
- * @param contact 
- * in case anything failed, this makes sure we reset 
- * that contact entry to default
- */
-void	PhoneBook::addContact(Contact cont)
+bool	PhoneBook::enterFirstName()
 {
-	this->contacts[contact_count] = cont;
-	this->contact_count ++;
-	if (this->contact_count == 8)
-		this->contact_count = 0;
+	std::string	line;
+
+	std::cout<<"Enter first name:"<<std::endl;
+	if (!std::getline(std::cin, line))
+		exit(1) ;
+	if (!addErrorHandler(line, "first name", true))
+		return (false);
+	contact.setFirstName(line);
+	return (true);
 }
 
-/**
- * @brief shows list of all saved elements
- * 
- */
-void PhoneBook::contactSearch()
+bool	PhoneBook::enterLastName()
+{
+	std::string	line;
+
+	std::cout << "Enter last name:" << std::endl;
+	if (!std::getline(std::cin, line))
+		exit(1) ;
+	if (!addErrorHandler(line, "last name", true))
+			return (false);
+	contact.setLastName(line);
+	return (true);
+}
+
+bool	PhoneBook::enterNickname()
+{
+	std::string	line;
+
+	std::cout << "Enter nickname:" << std::endl;
+	if (! std::getline(std::cin, line))
+		exit (1);
+	if (!addErrorHandler(line, "nickname", true))
+		return (false);
+	contact.setNickname(line);
+	return (true);
+}
+bool	PhoneBook::enterPhoneNum()
+{
+	std::string	line;
+
+	std::cout << "Enter phone number:" << std::endl;
+	if (! std::getline(std::cin, line))
+		exit (1);
+	if (!addErrorHandler(line, "phone number", false))
+		return (false);
+	contact.setPhoneNumber(line);
+	return (true);
+}
+
+bool	PhoneBook::enterSecret()
+{
+	std::string	line;
+
+	std::cout << "Enter deepest darkest secret:" << std::endl;
+	if (! std::getline(std::cin, line))
+		exit (1);
+	if (!addErrorHandler(line, "secrect", true))
+		return (false);
+	contact.setSecret(line);
+	std::cout << "Oops, now we get to expose that!" << std::endl;
+	return (true);
+}
+bool	PhoneBook::addErrorHandler(std::string input,
+			std::string input_type, bool alpha)
+{
+	if (!input.c_str() || input.size() == 0)
+	{
+		std::cout << "Must enter "<< input_type << "!" << std::endl;
+		return (false);
+	}
+	if (!stringType(input, alpha))
+	{
+		std::cout << "Wrong entery for "<< input_type << " !" << std::endl;
+		return (false);
+	}
+	return (true);
+}
+
+void	PhoneBook::add()
+{
+	contacts[contact_count % 8] = contact;
+	contact_count++;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//  							SEARCH CONTACT								 //
+///////////////////////////////////////////////////////////////////////////////
+void	PhoneBook::search() const
 {
 	if (contact_count == 0)
 		std::cout << "NO CONTACTS HAVE BEEN SAVED!" << std::endl;
 	else
-		getContacts();
+		getContact();
 }
 
-PhoneBook::~PhoneBook (void)
+void	PhoneBook::getContact() const
 {
-	return ;
+	int	idx;
+	std::string line;
+	std::stringstream ss;
+
+	idx = 0;
+	tableLayout();
+	while (idx < contact_count)
+	{
+		std::cout << "║         " << idx + 1 <<"|" << resizeContent(contacts[idx].getFirstname(), 9, false) << "|" 
+			<< resizeContent(contacts[idx].getLastname(), 9, false) << "|" << resizeContent(contacts[idx].getNickname(), 9, false) << "║" <<std::endl;
+		std::cout << "╚═══════════════════════════════════════════╝" << std::endl;
+		idx ++;
+	}
+
+	idx = 0;
+	std::cout << "Enter the index of the contact you wish to retrieve: ";
+	if (!std::getline(std::cin, line))
+		exit(1);
+	ss << line;
+	ss >> idx;
+	idx --;
+
+	if (idx < contact_count && idx >= 0)
+	{
+		std::cout << "╔═════════════════════════════════════════════════════════════════╗" << std::endl;
+		std::cout << "║First name   ║" << resizeContent(contacts[idx].getFirstname(), 50, true) << "║" << std::endl;
+		std::cout << "║Last name    ║" << resizeContent(contacts[idx].getLastname(), 50, true) << "║" << std::endl;
+		std::cout << "║Nickname     ║" << resizeContent(contacts[idx].getNickname(), 50, true) << "║" << std::endl;
+		std::cout << "║Phone number ║" << resizeContent(contacts[idx].getPhoneNumber(), 50, true) << "║" << std::endl;
+		std::cout << "║secret       ║" << resizeContent(contacts[idx].getSecret(), 50, true) << "║" << std::endl;
+		std::cout << "╚═════════════════════════════════════════════════════════════════╝" << std::endl;
+	}
+	else
+		std::cout << "Wrong index entry!" << std::endl;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//  						NON MEMBER FUNCTIONS							 //
+///////////////////////////////////////////////////////////////////////////////
+
+bool	stringType(std::string str, bool alpha)
+{
+	if (alpha)
+	{
+		for (size_t i = 0; i < str.length(); i++)
+		{
+			if (!std::isalpha(str[i]) && str[i] != ' ')
+				return false;
+		}
+	}
+	else
+	{
+		for (size_t i = 0; i < str.length(); i++)
+		{
+			if (!std::isdigit(str[i]))
+				return false;
+		}
+	}
+	return (true);
+}
+
+std::string	resizeContent(std::string const str, unsigned int len, bool detailed)
+{
+	std::string temp;
+
+	temp = str;
+	if (temp.size() > len)
+		temp.resize(len), temp += '.';
+	if (!detailed)
+	{
+		while (temp.size() < (len + 1))
+		{
+			temp = " " + temp;
+		}
+	}
+	else
+	{
+		if (temp.size() < (len + 1))
+			temp.append((len+1) - temp.size(), ' ');
+	}
+	return (temp);
+}
+
+void	tableLayout()
+{
+	std::cout << "╔═══════════════════════════════════════════╗" << std::endl;
+	std::cout << "║     index|First Name| last name|  nickname║" << std::endl;
+	std::cout << "╚═══════════════════════════════════════════╝" << std::endl;
 }
