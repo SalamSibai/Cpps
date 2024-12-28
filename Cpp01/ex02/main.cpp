@@ -9,7 +9,7 @@ int main()
 
 	std::cout << "ADDRESSES:" << std::endl;
 	std::cout << "The address of str is			" << &str << std::endl;
-	std::cout << "The memory str_prt is pointing to is	" << stringPTR << std::endl;
+	std::cout << "The memory stringPTR is pointing to is	" << stringPTR << std::endl;
 	std::cout << "The stringREF memory address is		" << &stringREF << std::endl;
 
 	std::cout << std::endl;

@@ -3,6 +3,7 @@ NAME	=	manyzombies
 
 FILES	=	main.cpp		\
 			Zombie.cpp		\
+			zombieHorde.cpp
 
 CXX		=	c++
 

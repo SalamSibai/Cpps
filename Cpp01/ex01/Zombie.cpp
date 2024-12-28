@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/28 19:02:33 by ssibai            #+#    #+#             */
+/*   Updated: 2024/12/28 19:02:36 by ssibai           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "Zombie.hpp"
 
@@ -16,17 +27,4 @@ void	Zombie::announce(void)
 Zombie::~Zombie()
 {
 	std::cout << this->_name << " is dying." << std::endl;
-}
-
-Zombie* Zombie::zombieHorde(int N, std::string name)
-{
-	Zombie* zombies = new Zombie[N];
-
-
-	for (int i = 0; i < N; i++)
-	{
-		zombies[i].setName(name);
-	}
-
-	return (zombies);
 }

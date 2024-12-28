@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 13:00:07 by ssibai            #+#    #+#             */
-/*   Updated: 2024/12/25 15:25:08 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/12/28 15:08:17 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 PhoneBook::PhoneBook()
 {
 	contact_count = 0;
+	index = 0;
 }
 PhoneBook::~PhoneBook()
 {
@@ -123,6 +124,8 @@ bool	PhoneBook::addErrorHandler(std::string input,
 void	PhoneBook::add()
 {
 	contacts[contact_count % 8] = contact;
+	if (index != 8)
+		index ++;
 	contact_count++;
 }
 
@@ -145,7 +148,7 @@ void	PhoneBook::getContact() const
 
 	idx = 0;
 	tableLayout();
-	while (idx < contact_count)
+	while (idx < index)
 	{
 		std::cout << "║         " << idx + 1 <<"|" << resizeContent(contacts[idx].getFirstname(), 9, false) << "|" 
 			<< resizeContent(contacts[idx].getLastname(), 9, false) << "|" << resizeContent(contacts[idx].getNickname(), 9, false) << "║" <<std::endl;
@@ -161,7 +164,7 @@ void	PhoneBook::getContact() const
 	ss >> idx;
 	idx --;
 
-	if (idx < contact_count && idx >= 0)
+	if (idx < index && idx >= 0)
 	{
 		std::cout << "╔═════════════════════════════════════════════════════════════════╗" << std::endl;
 		std::cout << "║First name   ║" << resizeContent(contacts[idx].getFirstname(), 50, true) << "║" << std::endl;

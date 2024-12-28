@@ -15,24 +15,8 @@ void	Harl::complain(std::string level)
 	int	i = 0;
 	while (i < 4 && str_arr[i].compare(level.c_str()) != 0)
 		i++;
-	
-	switch(i)
-	{
-		case 0:
-			(this->*funptr[0])();
-			break;
-		case 1:
-			(this->*funptr[1])();
-			break;
-		case 2:
-			(this->*funptr[2])();
-			break;
-		case 3:
-			(this->*funptr[3])();
-			break;
-		default:
-			break;
-	}
+	if (i < 4)
+		(this->*funptr[i])();
 }
 
 void	Harl::debug(void)
