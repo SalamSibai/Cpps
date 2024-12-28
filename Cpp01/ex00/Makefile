@@ -6,7 +6,7 @@
 #    By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/28 19:33:28 by ssibai            #+#    #+#              #
-#    Updated: 2024/12/28 19:34:06 by ssibai           ###   ########.fr        #
+#    Updated: 2024/12/28 19:42:22 by ssibai           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = zombies
 
 FILES = main.cpp 			\
 		Zombie.cpp 			\
-		NewZombie.cpp		\
+		newZombie.cpp		\
 		randomChump.cpp		\
 
 CXX = c++
