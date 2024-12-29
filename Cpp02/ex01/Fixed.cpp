@@ -11,6 +11,11 @@ Fixed::Fixed(const Fixed& fixed)
 	*this = fixed;
 }
 
+Fixed::Fixed(const int	i)
+{
+
+}
+
 Fixed& 		Fixed::operator=(const Fixed &rhs)
 {
 	this->fixed_point = rhs.getRawBits();

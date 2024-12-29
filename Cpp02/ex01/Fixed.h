@@ -1,7 +1,9 @@
 
 
 /**
- * @brief 
+ * @brief to define a fixed point value, we need:
+ * 			1) the width of the number
+ * 			2) the position where the decimal point is
  * 
  */
 
@@ -30,7 +32,6 @@ class Fixed
 		~Fixed();
 		int 	getRawBits(void) const;
 		void	setRawBits(const int raw);
-
 };
 
 #endif
