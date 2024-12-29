@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/28 19:02:38 by ssibai            #+#    #+#             */
+/*   Updated: 2024/12/28 19:34:46 by ssibai           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef ZOMBIE_HPP
 #define ZOMBIE_HPP
@@ -17,9 +27,9 @@ public:
 	}
 	void	setName(const std::string& n);
 	void	announce(void);
-	Zombie* zombieHorde(int N, std::string name );
 	~Zombie();
 };
 
+Zombie* zombieHorde(int N, std::string name );
 
 #endif

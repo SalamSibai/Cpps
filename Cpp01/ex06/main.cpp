@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/28 19:25:56 by ssibai            #+#    #+#             */
+/*   Updated: 2024/12/28 19:26:55 by ssibai           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "Harl.h"
 
@@ -9,8 +20,7 @@ int main(int ac, char **av)
 		std::cout << "Wrong number of parameters." << std::endl;
 	else
 	{
-		std::cout << "[" << av[1] << "]" << std::endl;
 		harl.complain(av[1]);
 	}
-    return 0;
+	return 0;
 }

@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   randomChump.cpp                                    :+:      :+:    :+:   */
+/*   zombieHorde.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/28 19:31:59 by ssibai            #+#    #+#             */
-/*   Updated: 2024/12/28 19:32:01 by ssibai           ###   ########.fr       */
+/*   Created: 2024/12/28 19:02:27 by ssibai            #+#    #+#             */
+/*   Updated: 2024/12/28 19:03:57 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-//creates a zombie on the stack
-void	randomChump(std::string name)
+Zombie* zombieHorde(int N, std::string name)
 {
-	Zombie random_chump;
-	random_chump.setName(name);
-	random_chump.announce();
+	if (N <= 0)
+		return (NULL);
+
+	Zombie* zombies = new Zombie[N];
+	for (int i = 0; i < N; i++)
+	{
+		zombies[i].setName(name);
+	}
+	return (zombies);
 }

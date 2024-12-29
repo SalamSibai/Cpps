@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Harl.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/28 19:38:05 by ssibai            #+#    #+#             */
+/*   Updated: 2024/12/28 19:38:08 by ssibai           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <iostream>
 #include "Harl.h"
@@ -15,24 +26,8 @@ void	Harl::complain(std::string level)
 	int	i = 0;
 	while (i < 4 && str_arr[i].compare(level.c_str()) != 0)
 		i++;
-	
-	switch(i)
-	{
-		case 0:
-			(this->*funptr[0])();
-			break;
-		case 1:
-			(this->*funptr[1])();
-			break;
-		case 2:
-			(this->*funptr[2])();
-			break;
-		case 3:
-			(this->*funptr[3])();
-			break;
-		default:
-			break;
-	}
+	if (i < 4)
+		(this->*funptr[i])();
 }
 
 void	Harl::debug(void)

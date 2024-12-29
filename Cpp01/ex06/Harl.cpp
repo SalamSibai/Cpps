@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Harl.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/28 19:29:52 by ssibai            #+#    #+#             */
+/*   Updated: 2024/12/28 19:29:56 by ssibai           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <iostream>
 #include "Harl.h"
@@ -20,37 +31,38 @@ void	Harl::complain(std::string level)
 	{
 		case 0:
 			(this->*funptr[0])();
-			break;
 		case 1:
 			(this->*funptr[1])();
-			break;
 		case 2:
 			(this->*funptr[2])();
-			break;
 		case 3:
 			(this->*funptr[3])();
 			break;
 		default:
-			std::cout << "doesn't matter really.." << std::endl; 
+			std::cout << "[doesn't matter really..]" << std::endl; 
 	}
 }
 
 void	Harl::debug(void)
 {
+	std::cout << "[DEBUG]" << std::endl;
 	std::cout << "I AM DEBUGGING!" << std::endl;
 }
 
 void	Harl::info(void)
 {
-	std::cout << "I AM GIVING INFO!" << std::endl;
+	std::cout << "[INFO]" << std::endl;
+	std::cout << "I AM GIVING INFO!\n" << std::endl;
 }
 
 void	Harl::warning(void)
 {
-	std::cout << "I AM GIVING WARGNING!" << std::endl;
+	std::cout << "[WARNING]" << std::endl;
+	std::cout << "I AM GIVING WARGNING!\n" << std::endl;
 }
 
 void	Harl::error(void)
 {
-	std::cout << "I AM ERROR!" << std::endl;
+	std::cout << "[ERROR]" << std::endl;
+	std::cout << "I AM ERROR!\n" << std::endl;
 }

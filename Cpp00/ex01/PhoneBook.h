@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 12:23:22 by ssibai            #+#    #+#             */
-/*   Updated: 2024/12/25 15:21:33 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/12/28 15:08:16 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ class PhoneBook
 		Contact	contacts[8];
 		Contact	contact;
 		int		contact_count;
+		int		index;
 
 	public:
 		PhoneBook();
