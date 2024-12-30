@@ -1,11 +1,5 @@
 
 
-/**
- * @brief to define a fixed point value, we need:
- * 			1) the width of the number
- * 			2) the position where the decimal point is
- * 
- */
 
 #ifndef	FIXED_H
 #define	FIXED_H
