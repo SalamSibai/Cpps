@@ -46,7 +46,7 @@ Fixed::Fixed(const int	i)
  * 			if a cast is used, it would more correctly represent
  * 			the number.
  * 
- * @param i the value of the fixed point in int 	
+ * @param i the value of the fixed point in int
  */
 Fixed::Fixed(const float i)
 {
@@ -119,31 +119,90 @@ bool Fixed::operator!=(const Fixed& other)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+//							increments and decrements						 //
+///////////////////////////////////////////////////////////////////////////////
+
+void	Fixed::operator++()
+{
+	++fixed_point;
+}
+
+void	Fixed::operator--()
+{
+	--fixed_point;
+}
+
+Fixed&	Fixed::operator++(int num)
+{
+	Fixed	temp(*this);
+	++fixed_point;
+	return (temp);
+}
+
+Fixed&	Fixed::operator--(int num)
+{
+	Fixed	temp(*this);
+	--fixed_point;
+	return (temp);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 //							arthmetic operators								 //
 ///////////////////////////////////////////////////////////////////////////////
 
-		Fixed Fixed::operator+(const Fixed& rhs)
+	Fixed Fixed::operator+(const Fixed& rhs)
+	{
+		Fixed result;
+		result.fixed_point = fixed_point + rhs.fixed_point;
+		return (result);
+	}
+
+	Fixed Fixed::operator-(const Fixed& rhs)
+	{
+		Fixed result;
+		fixed_point = fixed_point - rhs.fixed_point;
+	}
+
+	Fixed Fixed::operator*(const Fixed& rhs)
+	{
+		Fixed result;
+		result = fixed_point * rhs.fixed_point;
+	}
+
+	Fixed Fixed::operator/(const Fixed& rhs)
+	{
+		Fixed result;
+		if (rhs.fixed_point == 0)
+			fixed_point *= rhs.fixed_point;
+	}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//									min and max								 //
+///////////////////////////////////////////////////////////////////////////////
+
+		static Fixed& Fixed::min(const Fixed& num1, const Fixed& num2)
 		{
-			Fixed result;
-			result.fixed_point = fixed_point + rhs.fixed_point;
-			return (result);
+			if (num1 > num2)
+				return (num2);
+			return (num1);
 		}
-		Fixed Fixed::operator-(const Fixed& rhs)
+
+		static Fixed& Fixed::min(Fixed& num1, Fixed& num2)
 		{
-			Fixed result;
-			fixed_point = fixed_point - rhs.fixed_point;
+
 		}
-		Fixed Fixed::operator*(const Fixed& rhs)
+
+		static Fixed& Fixed::max(Fixed& num1, Fixed& num2)
 		{
-			Fixed result;
-			result = fixed_point * rhs.fixed_point;
+
 		}
-		Fixed Fixed::operator/(const Fixed& rhs)
+
+		static Fixed& Fixed::max(const Fixed& num1, const Fixed& num2)
 		{
-			Fixed result;
-			if (rhs.fixed_point == 0)
-				fixed_point *= rhs.fixed_point;
+
 		}
+
 ///////////////////////////////////////////////////////////////////////////////
 //							non-member functions							 //
 ///////////////////////////////////////////////////////////////////////////////
