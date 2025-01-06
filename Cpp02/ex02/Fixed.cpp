@@ -1,10 +1,12 @@
 
 #include "Fixed.h"
 
-Fixed::Fixed()
-{
-	fixed_point = 0;
-}
+
+///////////////////////////////////////////////////////////////////////////////
+//							Constructors & Destructor						 //
+///////////////////////////////////////////////////////////////////////////////
+
+Fixed::Fixed() : fixed_point(0) {}
 
 Fixed::Fixed(const Fixed& fixed)
 {
@@ -19,7 +21,7 @@ Fixed&	Fixed::operator=(const Fixed &rhs)
 
 Fixed::~Fixed()
 {
-	std::cout << "destructor called" << std::endl;
+	//std::cout << "destructor called" << std::endl;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -50,7 +52,7 @@ Fixed::Fixed(const int	i)
  */
 Fixed::Fixed(const float i)
 {
-	fixed_point = (i * (1 << fractional_bits));
+	fixed_point = roundf(i * (1 << fractional_bits));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -86,34 +88,34 @@ int	Fixed::toInt() const
 ///////////////////////////////////////////////////////////////////////////////
 
 //less than operator
-bool Fixed::operator<(const Fixed& other)
+bool Fixed::operator<(const Fixed& other) const
 {
 	return (fixed_point < other.fixed_point);
 }
 
-bool Fixed::operator>(const Fixed& other)
+bool Fixed::operator>(const Fixed& other) const
 {
 	return (other.fixed_point < fixed_point);
 }
 
-bool Fixed::operator>=(const Fixed& other)
+bool Fixed::operator>=(const Fixed& other) const
 {
 	return (fixed_point == other.fixed_point ||
 			fixed_point > other.fixed_point);
 }
 
-bool Fixed::operator<=(const Fixed& other)
+bool Fixed::operator<=(const Fixed& other) const
 {
 	return (fixed_point == other.fixed_point ||
 			fixed_point < other.fixed_point);
 }
 
-bool Fixed::operator==(const Fixed& other)
+bool Fixed::operator==(const Fixed& other) const
 {
 	return (fixed_point == other.fixed_point);
 }
 
-bool Fixed::operator!=(const Fixed& other)
+bool Fixed::operator!=(const Fixed& other) const
 {
 	return (fixed_point != other.fixed_point);
 }
@@ -122,24 +124,26 @@ bool Fixed::operator!=(const Fixed& other)
 //							increments and decrements						 //
 ///////////////////////////////////////////////////////////////////////////////
 
-void	Fixed::operator++()
+Fixed&	Fixed::operator++()
 {
 	++fixed_point;
+	return (*this);
 }
 
-void	Fixed::operator--()
+Fixed&	Fixed::operator--()
 {
 	--fixed_point;
+	return (*this);
 }
 
-Fixed&	Fixed::operator++(int num)
+Fixed Fixed::operator++(int) 
 {
-	Fixed	temp(*this);
-	++fixed_point;
-	return (temp);
+    Fixed temp(*this);  // Save the current state
+    ++fixed_point;      // Increment the value
+    return temp;        // Return the saved state
 }
 
-Fixed&	Fixed::operator--(int num)
+Fixed	Fixed::operator--(int)
 {
 	Fixed	temp(*this);
 	--fixed_point;
@@ -150,58 +154,68 @@ Fixed&	Fixed::operator--(int num)
 //							arthmetic operators								 //
 ///////////////////////////////////////////////////////////////////////////////
 
-	Fixed Fixed::operator+(const Fixed& rhs)
-	{
-		Fixed result;
-		result.fixed_point = fixed_point + rhs.fixed_point;
-		return (result);
-	}
+Fixed Fixed::operator+(const Fixed& rhs)
+{
+	Fixed result;
+	result.fixed_point = fixed_point + rhs.fixed_point;
+	return (result);
+}
 
-	Fixed Fixed::operator-(const Fixed& rhs)
-	{
-		Fixed result;
-		fixed_point = fixed_point - rhs.fixed_point;
-	}
+Fixed Fixed::operator-(const Fixed& rhs)
+{
+	Fixed result;
+	fixed_point = fixed_point - rhs.fixed_point;
+	return (result);
+}
 
-	Fixed Fixed::operator*(const Fixed& rhs)
-	{
-		Fixed result;
-		result = fixed_point * rhs.fixed_point;
-	}
+Fixed Fixed::operator*(const Fixed& rhs) 
+{
+	Fixed result;
+	result.fixed_point = (fixed_point * rhs.fixed_point) >> fractional_bits;
+	return result;
+}
 
-	Fixed Fixed::operator/(const Fixed& rhs)
-	{
-		Fixed result;
-		if (rhs.fixed_point == 0)
-			fixed_point *= rhs.fixed_point;
-	}
 
+Fixed Fixed::operator/(const Fixed& rhs)
+{
+	Fixed result;
+	if (rhs.fixed_point != 0)
+		result.fixed_point = (fixed_point << fractional_bits) / rhs.fixed_point;
+	return result;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //									min and max								 //
 ///////////////////////////////////////////////////////////////////////////////
 
-		static Fixed& Fixed::min(const Fixed& num1, const Fixed& num2)
-		{
-			if (num1 > num2)
-				return (num2);
-			return (num1);
-		}
+const Fixed& Fixed::min(const Fixed& num1, const Fixed& num2)
+{
+	if (num1.fixed_point > num2.fixed_point)
+		return num2;
+	return num1;
+}
 
-		static Fixed& Fixed::min(Fixed& num1, Fixed& num2)
-		{
+Fixed& Fixed::min(Fixed& num1, Fixed& num2)
+{
+	if (num1.fixed_point > num2.fixed_point)
+		return num2;
+	return num1;
+}
 
-		}
+const Fixed& Fixed::max(const Fixed& num1, const Fixed& num2)
+{
+	if (num1.fixed_point < num2.fixed_point)
+		return num2;
+	return num1;
+}
 
-		static Fixed& Fixed::max(Fixed& num1, Fixed& num2)
-		{
+Fixed& Fixed::max(Fixed& num1, Fixed& num2)
+{
+	if (num1.fixed_point < num2.fixed_point) 
+		return num2;
+	return num1;
+}
 
-		}
-
-		static Fixed& Fixed::max(const Fixed& num1, const Fixed& num2)
-		{
-
-		}
 
 ///////////////////////////////////////////////////////////////////////////////
 //							non-member functions							 //

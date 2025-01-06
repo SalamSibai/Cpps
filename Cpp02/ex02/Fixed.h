@@ -1,10 +1,10 @@
 
 
-
 #ifndef	FIXED_H
 #define	FIXED_H
 
 #include <iostream>
+#include <cmath>
 
 class Fixed
 {
@@ -28,12 +28,12 @@ class Fixed
 //							Comparision operators							 //
 ///////////////////////////////////////////////////////////////////////////////
 
-		bool operator<(const Fixed& other);
-		bool operator>(const Fixed& other);
-		bool operator>=(const Fixed& other);
-		bool operator<=(const Fixed& other);
-		bool operator==(const Fixed& other);
-		bool operator!=(const Fixed& other);
+		bool operator<(const Fixed& other) const;
+		bool operator>(const Fixed& other) const;
+		bool operator>=(const Fixed& other) const;
+		bool operator<=(const Fixed& other) const;
+		bool operator==(const Fixed& other) const;
+		bool operator!=(const Fixed& other) const;
 
 ///////////////////////////////////////////////////////////////////////////////
 //							arthmetic operators								 //
@@ -48,22 +48,22 @@ class Fixed
 //							increments and decrements						 //
 ///////////////////////////////////////////////////////////////////////////////
 
-		void	operator++();
-		void	operator--();
+		Fixed&	operator++();
+		Fixed&	operator--();
 	//returning a reference allows the use of the previous value, 
 	//then the decrementing or incerementing of the number
-		Fixed&	operator++(int num);
-		Fixed&	operator--(int num);
+		Fixed	operator++(int);
+		Fixed	operator--(int);
 
 ///////////////////////////////////////////////////////////////////////////////
 //									min and max								 //
 ///////////////////////////////////////////////////////////////////////////////
 
-		static Fixed& min(const Fixed& num1, const Fixed& num2);
+		static const Fixed& min(const Fixed& num1, const Fixed& num2);
 		static Fixed& min(Fixed& num1, Fixed& num2);
 
+		static const Fixed& max(const Fixed& num1, const Fixed& num2);
 		static Fixed& max(Fixed& num1, Fixed& num2);
-		static Fixed& max(const Fixed& num1, const Fixed& num2);
 
 
 		int 	getRawBits(void) const;

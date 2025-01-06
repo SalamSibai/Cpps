@@ -35,7 +35,7 @@ Fixed::Fixed(const int	i)
  */
 Fixed::Fixed(const float i)
 {
-	fixed_point = (i * (1 << fractional_bits));
+	fixed_point = roundf(i * (1 << fractional_bits));
 }
 
 Fixed&	Fixed::operator=(const Fixed &rhs)
