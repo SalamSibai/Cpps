@@ -22,7 +22,7 @@ Fixed& 		Fixed::operator=(const Fixed &rhs)
 
 int	Fixed::getRawBits() const
 {
-	std::cout << "getter called\n";
+	std::cout << "get raw bits called\n";
 	return (this->fixed_point);
 }
 

@@ -56,12 +56,14 @@ void Fixed::setRawBits(const int raw)
 
 float	Fixed::toFloat() const
 {
-	return (fixed_point / 256.0f);
+	//return (fixed_point / 256.0f);
+	return fixed_point / (1.0f * (1 << fractional_bits));
 }
 
 int	Fixed::toInt() const
 {
-	return (fixed_point / 256);
+	//return (fixed_point / 256);
+	return fixed_point / (1.0f * (1 << fractional_bits));
 }
 
 Fixed::~Fixed()

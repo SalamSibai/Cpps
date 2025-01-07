@@ -4,10 +4,7 @@
 int main()
 {
 	ScavTrap c("robot");
-
-	
 	ScavTrap b;
-
 	ScavTrap d(c);
 	c.attack("human");
 	c.guardGate();

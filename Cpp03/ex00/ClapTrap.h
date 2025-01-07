@@ -1,4 +1,6 @@
 
+#ifndef	CLAPTRAP_H
+#define	CLAPTRAP_H
 
 #include <iostream>
 
@@ -21,3 +23,5 @@ class ClapTrap
 		void	takeDamage(unsigned int amout);
 		void	beRepaired(unsigned int amout);
 };
+
+#endif
