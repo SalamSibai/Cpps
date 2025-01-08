@@ -61,12 +61,6 @@ void	FragTrap::attack(const std::string& target)
 		else
 			std::cout << "no energy points, cant attack " << target << ", lucky " << target << std::endl;
 	}
-
-}
-
-void	FragTrap::guardGate()
-{	
-	std::cout << "#FragTrap: is in gatekeeping mode now." << std::endl;
 }
 
 void	FragTrap::highFivesGuys()
