@@ -5,11 +5,11 @@ FILES	=	main.cpp		\
 			Animal.cpp		\
 			Cat.cpp			\
 			Dog.cpp			\
-			WrongAnimal.cpp \
+			Brain.cpp		\
 
 CXX		=	c++
 
-CXXFLAGS = -Wall -Werror -Wextra -std=c++98
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98 -fsanitize=address -g3
 
 OBJS = $(FILES:.cpp=.o)
 
