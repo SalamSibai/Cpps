@@ -1,12 +1,12 @@
 /******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
+/*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssibai <ssibai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/20 10:51:28 by ssibai            #+#    #+#             */
-/*   Updated: 2025/05/20 10:51:57 by ssibai           ###   ########.fr       */
+/*   Created: 2025/05/20 11:01:45 by ssibai            #+#    #+#             */
+/*   Updated: 2025/05/20 11:04:59 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -18,7 +18,7 @@
 
 class Bureaucrat;
 
-class   Form
+class   AForm
 {
 	private:
 		const	std::string name;
@@ -39,11 +39,11 @@ class   Form
 		};
 
 	public:
-		Form();
-		Form(std::string n, int gs, int ge);
-		Form(const Form& other);
-		Form&	operator=(const Form& lhs);
-		~Form();
+		AForm();
+		AForm(std::string n, int gs, int ge);
+		AForm(const AForm& other);
+		AForm&	operator=(const AForm& lhs);
+		~AForm();
 
 		const	std::string	getName() const;
 		int					getGradeToSign() const;
@@ -52,7 +52,7 @@ class   Form
 		void				beSigned(Bureaucrat& bx);
 };
 
-std::ostream&	operator<<(std::ostream& os, Form& form);
+std::ostream&	operator<<(std::ostream& os, AForm& form);
 
 #endif
 
