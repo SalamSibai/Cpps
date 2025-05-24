@@ -6,7 +6,7 @@
 /*   By: ssibai <ssibai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 11:01:39 by ssibai            #+#    #+#             */
-/*   Updated: 2025/05/20 11:03:57 by ssibai           ###   ########.fr       */
+/*   Updated: 2025/05/24 16:24:34 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -20,21 +20,26 @@ AForm::AForm(std::string n, int gs, int ge)
 	: name(n), grade_to_sign(gs), 
 		grade_to_execute(ge), is_signed(false) {}
 
-AForm::AForm(const AForm& other) 
-	: name(other.getName()), grade_to_sign(other.getGradeToSign()), 
-		grade_to_execute(other.getGradeToExecute()), is_signed(other.getIsSigned()) {}
+// AForm::AForm(const AForm& other) 
+// 	: name(other.getName()), grade_to_sign(other.getGradeToSign()), 
+// 		grade_to_execute(other.getGradeToExecute()), is_signed(other.getIsSigned()) {}
 
-AForm&	AForm::operator=(const AForm& lhs)
-{
-	if (this != &lhs)
-		is_signed = lhs.getIsSigned();
-	return *this;
-}
+// AForm&	AForm::operator=(const AForm& lhs)
+// {
+// 	if (this != &lhs)
+// 		is_signed = lhs.getIsSigned();
+// 	return *this;
+// }
 
 AForm::~AForm()
 {
 	std::cout << "Destructor called on Aform " << name << std::endl;
 }
+
+// void AForm::setIsSigned(bool val)
+// {
+// 	is_signed = val;
+// }
 
 const std::string AForm::getName() const 
 {
