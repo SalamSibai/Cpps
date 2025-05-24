@@ -6,15 +6,15 @@
 /*   By: ssibai <ssibai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 11:01:39 by ssibai            #+#    #+#             */
-/*   Updated: 2025/05/24 16:24:34 by ssibai           ###   ########.fr       */
+/*   Updated: 2025/05/24 20:01:57 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "Form.hpp"
 
-AForm::AForm() 
-	: name("default"), grade_to_sign(1), 
-		grade_to_execute(1), is_signed(false) {}
+// AForm::AForm() 
+// 	: name("default"), grade_to_sign(1), 
+// 		grade_to_execute(1), is_signed(false) {}
 
 AForm::AForm(std::string n, int gs, int ge) 
 	: name(n), grade_to_sign(gs), 
@@ -24,12 +24,12 @@ AForm::AForm(std::string n, int gs, int ge)
 // 	: name(other.getName()), grade_to_sign(other.getGradeToSign()), 
 // 		grade_to_execute(other.getGradeToExecute()), is_signed(other.getIsSigned()) {}
 
-// AForm&	AForm::operator=(const AForm& lhs)
-// {
-// 	if (this != &lhs)
-// 		is_signed = lhs.getIsSigned();
-// 	return *this;
-// }
+AForm&	AForm::operator=(const AForm& lhs)
+{
+	if (this != &lhs)
+		is_signed = lhs.getIsSigned();
+	return *this;
+}
 
 AForm::~AForm()
 {

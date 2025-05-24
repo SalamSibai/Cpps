@@ -6,7 +6,7 @@
 /*   By: ssibai <ssibai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 11:01:45 by ssibai            #+#    #+#             */
-/*   Updated: 2025/05/24 16:24:39 by ssibai           ###   ########.fr       */
+/*   Updated: 2025/05/24 20:08:40 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -42,14 +42,16 @@ class   AForm
 		AForm() = default;
 		AForm(std::string n, int gs, int ge);
 		AForm(const AForm& other) = default;
-		AForm&	operator=(const AForm& lhs) = delete;
+		AForm&	operator=(const AForm& lhs);
 		virtual ~AForm();
 
 		const	std::string	getName() const;
 		int					getGradeToSign() const;
 		int					getGradeToExecute() const;
 		bool				getIsSigned() const;
-		void				beSigned(Bureaucrat& bx);		
+		void				beSigned(Bureaucrat& bx);
+
+		virtual	void		execute(Bureaucrat const & executor) = 0;
 };
 
 std::ostream&	operator<<(std::ostream& os, AForm& form);
