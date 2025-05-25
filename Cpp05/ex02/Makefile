@@ -1,13 +1,14 @@
 
-NAME	=	Bureaucrat
+NAME	=	form
 
 FILES	=	main.cpp		\
 			Bureaucrat.cpp	\
 			AForm.cpp		\
+			ShrubberyCreationForm.cpp \
 
 CXX		=	c++
 
-CXXFLAGS = -Wall -Werror -Wextra -std=c++98
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98 -fsanitize=address
 
 OBJS = $(FILES:.cpp=.o)
 

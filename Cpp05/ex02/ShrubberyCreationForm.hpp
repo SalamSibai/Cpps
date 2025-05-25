@@ -28,12 +28,19 @@
 class ShrubberyCreationForm : public AForm
 {
     private:
+        std::string target;
+        void    drawTree() const;
+
+    protected:
 
     public:
         ShrubberyCreationForm();
-        ShrubberyCreationForm(std::string n, int gs, int ge);
+        ShrubberyCreationForm(std::string t);
         ShrubberyCreationForm(const ShrubberyCreationForm& other);
         ShrubberyCreationForm& operator=(const ShrubberyCreationForm& lhs);
-};
+        ~ShrubberyCreationForm();
+
+		void 	execute(Bureaucrat const & executor) const;
+  };
 
 #endif

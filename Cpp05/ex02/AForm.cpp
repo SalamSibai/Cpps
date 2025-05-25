@@ -10,19 +10,19 @@
 /*                                                                            */
 /******************************************************************************/
 
-#include "Form.hpp"
+#include "AForm.hpp"
 
-// AForm::AForm() 
-// 	: name("default"), grade_to_sign(1), 
-// 		grade_to_execute(1), is_signed(false) {}
+AForm::AForm() 
+	: name("default"), grade_to_sign(1), 
+		grade_to_execute(1), is_signed(false) {}
 
 AForm::AForm(std::string n, int gs, int ge) 
 	: name(n), grade_to_sign(gs), 
 		grade_to_execute(ge), is_signed(false) {}
 
-// AForm::AForm(const AForm& other) 
-// 	: name(other.getName()), grade_to_sign(other.getGradeToSign()), 
-// 		grade_to_execute(other.getGradeToExecute()), is_signed(other.getIsSigned()) {}
+AForm::AForm(const AForm& other) 
+	: name(other.getName()), grade_to_sign(other.getGradeToSign()), 
+		grade_to_execute(other.getGradeToExecute()), is_signed(other.getIsSigned()) {}
 
 AForm&	AForm::operator=(const AForm& lhs)
 {
@@ -33,13 +33,8 @@ AForm&	AForm::operator=(const AForm& lhs)
 
 AForm::~AForm()
 {
-	std::cout << "Destructor called on Aform " << name << std::endl;
+	std::cout << "Destructor called on Aform" << std::endl;
 }
-
-// void AForm::setIsSigned(bool val)
-// {
-// 	is_signed = val;
-// }
 
 const std::string AForm::getName() const 
 {
@@ -68,6 +63,15 @@ void	AForm::beSigned(Bureaucrat& b)
 	is_signed = true;
 }
 
+void	AForm::checkRequirments(Bureaucrat const & executor) const
+{
+	if (!is_signed)
+		throw	FormNotSignedException();
+	std::cout << "fine so far\n";
+	if (executor.getGrade() > getGradeToExecute())
+		throw	GradeTooLowException();
+}
+
 const char* AForm::GradeTooHighException::what() const throw()
 {
 	return ("Grade too high.");
@@ -78,6 +82,10 @@ const char* AForm::GradeTooLowException::what() const throw()
 	return ("Grade too low.");
 }
 
+const char* AForm::FormNotSignedException::what() const throw()
+{
+	return ("Form not signed.");
+}
 
 std::ostream&	operator<<(std::ostream& os, AForm& inst)
 {

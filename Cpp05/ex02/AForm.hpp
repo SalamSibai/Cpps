@@ -37,11 +37,16 @@ class   AForm
 			public:
 				const char* what() const throw();
 		};
+		class FormNotSignedException : public std::exception 
+		{
+			public:
+				const char* what() const throw();
+		};
 
 	public:
-		AForm() = default;
+		AForm();
 		AForm(std::string n, int gs, int ge);
-		AForm(const AForm& other) = default;
+		AForm(const AForm& other);
 		AForm&	operator=(const AForm& lhs);
 		virtual ~AForm();
 
@@ -51,8 +56,9 @@ class   AForm
 		bool				getIsSigned() const;
 		void				beSigned(Bureaucrat& bx);
 
-		virtual	void		execute(Bureaucrat const & executor) = 0;
-};
+		void				checkRequirments(Bureaucrat const & executor) const;
+		virtual void 		execute(Bureaucrat const & executor) const = 0;
+	};
 
 std::ostream&	operator<<(std::ostream& os, AForm& form);
 

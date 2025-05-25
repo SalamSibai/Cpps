@@ -15,9 +15,9 @@
 
 #include <iostream>
 #include <sstream>
-#include "Form.hpp"
+#include "AForm.hpp"
 
-class Form;
+class AForm;
 
 class Bureaucrat
 {
@@ -54,7 +54,8 @@ public:
 	void	incrementGrade();
 	void	decrementGrade();
 
-	void	signForm(Form& form);
+	void	signForm(AForm& f);
+	void	executeForm(const AForm& f);
 };
 
 std::ostream&	operator<<(std::ostream& os, Bureaucrat& inst);

@@ -11,42 +11,42 @@
 /******************************************************************************/
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 
 int main()
 {
-	Bureaucrat jack("jack", 140);
-	std::cout << jack << std::endl;
-	Bureaucrat bill("bill", 4);
-	// try {
-	// 	Bureaucrat curtis("curtis", 0);
-	// 	std::cout << curtis << std::endl;
-	// } catch (std::exception &e) {
-	// 	std::cerr << e.what() << "\n";
-	// }
-	std::cout << bill << std::endl;
+	Bureaucrat a("a", 140);
+	std::cout << a << std::endl;
+	Bureaucrat b("b", 150);
+	std::cout << b << std::endl;
+	Bureaucrat c("c", 120);
+	std::cout << c << std::endl;
 
-
-	Form tax = Form("Tax", 1, 2);
-	try 
+	ShrubberyCreationForm sForm("ShrubberyForm");
+	try
 	{
-		tax.beSigned(bill);
+		sForm.execute(a);
 	} 
 	catch (std::exception& e) 
 	{
-		std::cerr << e.what() << "\n";
+		std::cerr << "Couldn't execute because " << e.what() << "\n";
 	}
-	std::cout << tax;
-	// bill.signForm(tax);
-
-	
-	// try {
-	// 	tax.beSigned(jack);
-	// } catch (std::exception& e) {
-	// 	std::cerr << e.what() << "\n";
-	// }
-	// std::cout << tax;
-	// jack.signForm(tax);
-	
-	return (0);
+	try
+	{
+		sForm.execute(b);
+	} 
+	catch (std::exception& e) 
+	{
+		std::cerr << "Couldn't execute because " << e.what() << "\n";
+	}
+	try
+	{
+		c.signForm(sForm);
+		sForm.execute(c);
+	}
+	catch (std::exception& e) 
+	{
+		std::cerr << "Couldn't execute because " << e.what() << "\n";
+	}
 }
