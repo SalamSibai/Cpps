@@ -31,8 +31,6 @@ class ShrubberyCreationForm : public AForm
         std::string target;
         void    drawTree() const;
 
-    protected:
-
     public:
         ShrubberyCreationForm();
         ShrubberyCreationForm(std::string t);

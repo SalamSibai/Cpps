@@ -5,10 +5,12 @@ FILES	=	main.cpp		\
 			Bureaucrat.cpp	\
 			AForm.cpp		\
 			ShrubberyCreationForm.cpp \
+			RobotomyRequestForm.cpp \
+			PresidentialPardonForm.cpp \
 
 CXX		=	c++
 
-CXXFLAGS = -Wall -Werror -Wextra -std=c++98 -fsanitize=address
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 
 OBJS = $(FILES:.cpp=.o)
 

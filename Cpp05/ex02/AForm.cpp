@@ -33,7 +33,9 @@ AForm&	AForm::operator=(const AForm& lhs)
 
 AForm::~AForm()
 {
+	std::cout << "______________________________________________________\n";
 	std::cout << "Destructor called on Aform" << std::endl;
+	std::cout << "______________________________________________________\n";
 }
 
 const std::string AForm::getName() const 
@@ -67,7 +69,6 @@ void	AForm::checkRequirments(Bureaucrat const & executor) const
 {
 	if (!is_signed)
 		throw	FormNotSignedException();
-	std::cout << "fine so far\n";
 	if (executor.getGrade() > getGradeToExecute())
 		throw	GradeTooLowException();
 }
