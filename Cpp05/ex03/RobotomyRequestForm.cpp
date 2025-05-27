@@ -35,7 +35,7 @@ void	RobotomyRequestForm::execute(Bureaucrat const & executor) const
 
 RobotomyRequestForm::~RobotomyRequestForm()
 {
-	std::cout << "______________________________________________________\n";
-	std::cout<<"RobotomyRequestForm destructor called.\n";
-	std::cout << "______________________________________________________\n";
+	std::cout << "______________________________________________________\n"
+	<< "RobotomyRequestForm destructor called.\n"
+	<< "______________________________________________________\n";
 }

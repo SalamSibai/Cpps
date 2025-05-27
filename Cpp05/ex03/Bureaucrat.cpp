@@ -36,7 +36,7 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& lhs)
 
 Bureaucrat::~Bureaucrat()
 {
-	std::cout << "Destructor called on " << name << std::endl;
+	std::cout << "Destructor called on bureaucrat" << name << std::endl;
 }
 
 const std::string Bureaucrat::getName() const

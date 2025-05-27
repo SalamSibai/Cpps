@@ -33,9 +33,9 @@ AForm&	AForm::operator=(const AForm& lhs)
 
 AForm::~AForm()
 {
-	std::cout << "______________________________________________________\n";
-	std::cout << "Destructor called on Aform" << std::endl;
-	std::cout << "______________________________________________________\n";
+	std::cout << "______________________________________________________\n"
+	<< "Destructor called on Aform\n"
+	<< "______________________________________________________\n";
 }
 
 const std::string AForm::getName() const 
@@ -67,10 +67,12 @@ void	AForm::beSigned(Bureaucrat& b)
 
 void	AForm::checkRequirments(Bureaucrat const & executor) const
 {
-	if (!is_signed)
-		throw	FormNotSignedException();
+	if (executor.getGrade() > getGradeToExecute() && !is_signed)
+		throw	NoRequirmentMet();
 	if (executor.getGrade() > getGradeToExecute())
 		throw	GradeTooLowException();
+	if (!is_signed)
+		throw	FormNotSignedException();
 }
 
 const char* AForm::GradeTooHighException::what() const throw()
@@ -86,6 +88,11 @@ const char* AForm::GradeTooLowException::what() const throw()
 const char* AForm::FormNotSignedException::what() const throw()
 {
 	return ("Form not signed.");
+}
+
+const char* AForm::NoRequirmentMet::what() const throw()
+{
+	return ("No requirment met - grade too low and form not signed.");
 }
 
 std::ostream&	operator<<(std::ostream& os, AForm& inst)

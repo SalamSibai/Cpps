@@ -60,7 +60,7 @@ void	ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 
 ShrubberyCreationForm::~ShrubberyCreationForm()
 {
-	std::cout << "______________________________________________________\n";
-	std::cout<<"ShrubberyCreationForm destructor called.\n";
-	std::cout << "______________________________________________________\n";
+	std::cout << "______________________________________________________\n"
+	<< "ShrubberyCreationForm destructor called.\n"
+	<< "______________________________________________________\n";
 }

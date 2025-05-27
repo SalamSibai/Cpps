@@ -30,7 +30,7 @@ void	PresidentialPardonForm::execute(Bureaucrat const & executor) const
 
 PresidentialPardonForm::~PresidentialPardonForm()
 {
-	std::cout << "______________________________________________________\n";
-	std::cout<<"PresidentialPardonForm destructor called.\n";
-	std::cout << "______________________________________________________\n";
+	std::cout << "______________________________________________________\n"
+	<< "PresidentialPardonForm destructor called.\n"
+	<< "______________________________________________________\n";
 }

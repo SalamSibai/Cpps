@@ -36,7 +36,7 @@ AForm*  Intern::createPresidentialPardonForm(std::string targetName)
 AForm* Intern::makeForm(std::string form_name, std::string form_target)
 {
     AForm *temp;
-	std::string arr[] = {"robotomy Request", "shrubbery creation", "presidential pardon", form_name};
+	std::string arr[] = {"robotomy request", "shrubbery creation", "presidential pardon", form_name};
 
     int i = 0;
     while (i < 4 && arr[i].compare(form_name.c_str()) != 0)
