@@ -1,8 +1,8 @@
 
-NAME	=	Bureaucrat
+NAME	=	intern
 
 FILES	=	main.cpp		\
-			Bureaucrat.cpp	\
+			ScalarConverte.cpp	\
 
 CXX		=	c++
 

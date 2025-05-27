@@ -24,7 +24,8 @@ int main()
 	std::cout << b << std::endl;
 	Bureaucrat c("c", 120);
 	std::cout << c << std::endl;
-
+	
+	std::cout<< "---------- Shrubbery ----------\n" <<std::endl; 
 	ShrubberyCreationForm sForm("tree");
 	try
 	{
@@ -52,7 +53,9 @@ int main()
 	{
 		std::cerr << "Couldn't execute because " << e.what() << "\n";
 	}
-	
+
+	std::cout<< "---------- Robotomy ----------\n" <<std::endl; 
+
 	RobotomyRequestForm rForm("RobotomyRequest");
 
 
@@ -89,6 +92,7 @@ int main()
 		std::cerr << "Couldn't execute because " << e.what() << "\n";
 	}
 
+	std::cout<< "---------- Presidential ----------\n" <<std::endl; 
 	PresidentialPardonForm pForm("PresidentialForm");
 
 	Bureaucrat a_p("a_p", 140);
