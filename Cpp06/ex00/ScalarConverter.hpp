@@ -25,10 +25,10 @@ private:
 	static	void	fromFloat(const		std::string input);
 	static	void	fromDouble(const	std::string input);
 
-	static	void	toChar(int 	type);
-	static	void	toInt(int	type);
-	static	void	toFloat(int type);
-	static	void	toDouble(int type);
+	static	void	toChar();
+	static	void	toInt();
+	static	void	toFloat();
+	static	void	toDouble();
 
 public:
 	static void	convert(const std::string literal);

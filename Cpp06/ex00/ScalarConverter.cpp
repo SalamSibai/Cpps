@@ -33,7 +33,7 @@ int		ScalarConverter::checkType(const std::string input)
 	// 	return SPECIAL;
 	else if ((val >= std::numeric_limits<int>::min() 
 				&& val <= std::numeric_limits<int>::max()) 
-				&& (input.find('.') == std::string::npos))
+				&& (input.find('.') == std::string::npos)) // npos equevallent of "not found"
 		return INT;
 	else if ((val >= -std::numeric_limits<float>::max() 
 				&& val <= std::numeric_limits<float>::max())
@@ -47,10 +47,41 @@ int		ScalarConverter::checkType(const std::string input)
 	// return  NOTAPPLICABLE;
 }
 
+void	ScalarConverter::fromChar(const		std::string input)
+{
+	
+}
+
+void	ScalarConverter::fromInt(const		std::string input)
+{
+
+}
+
+void	ScalarConverter::fromFloat(const		std::string input)
+{
+
+}
+
+void	ScalarConverter::fromDouble(const		std::string input)
+{
+
+}
+
 void	ScalarConverter::convert(const std::string input)
 {
 	int	type = checkType(input);
-
+	switch (type)
+	{
+		case	CHAR:
+			fromChar(input);
+			break;
+		case	INT:
+			break;
+		case	FLOAT:
+			break;
+		case	DOUBLE:
+			break;
+	}
 }
 
 
