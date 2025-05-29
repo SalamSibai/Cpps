@@ -49,12 +49,19 @@ int		ScalarConverter::checkType(const std::string input)
 
 void	ScalarConverter::fromChar(const		std::string input)
 {
-	
+	if (std::isprint(input[0]))
+		std::cout << "char : '" << static_cast<char>(input[0])<< "'" << std::endl;
+	else
+		std::cout << "char: Not printable.\n";
+
+	std::cout << "int   : " << static_cast<int>(input[0]) << std::endl;
+	std::cout << "float : " << static_cast<float>(input[0]) << ".0f" << std::endl;
+	std::cout << "double: " << static_cast<double>(input[0]) << ".0" << std::endl;
 }
 
 void	ScalarConverter::fromInt(const		std::string input)
 {
-
+	
 }
 
 void	ScalarConverter::fromFloat(const		std::string input)
