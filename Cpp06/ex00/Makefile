@@ -1,12 +1,12 @@
 
-NAME	=	intern
+NAME	=	convert
 
 FILES	=	main.cpp		\
-			ScalarConverte.cpp	\
+			ScalarConverter.cpp	\
 
 CXX		=	c++
 
-CXXFLAGS = -Wall -Werror -Wextra -std=c++98
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98 -fsanitize=address -g3
 
 OBJS = $(FILES:.cpp=.o)
 
