@@ -1,3 +1,14 @@
+/******************************************************************************/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ScalarConverter.cpp                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ssibai <ssibai@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/30 17:32:50 by ssibai            #+#    #+#             */
+/*   Updated: 2025/05/31 13:55:10 by ssibai           ###   ########.fr       */
+/*                                                                            */
+/******************************************************************************/
 
 #include "ScalarConverter.hpp"
 
@@ -10,8 +21,8 @@ ScalarConverter::ScalarConverter(const ScalarConverter& other)
 
 ScalarConverter& ScalarConverter::operator=(const ScalarConverter& lhs)
 {
-    (void)lhs;
-    return *this;
+	(void)lhs;
+	return *this;
 }
 
 ScalarConverter::~ScalarConverter()
@@ -147,6 +158,3 @@ void	ScalarConverter::convert(const std::string input)
 			break;
 	}
 }
-
-
-

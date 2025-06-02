@@ -5,19 +5,27 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssibai <ssibai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/30 17:32:45 by ssibai            #+#    #+#             */
-/*   Updated: 2025/05/30 17:32:47 by ssibai           ###   ########.fr       */
+/*   Created: 2025/05/31 13:57:25 by ssibai            #+#    #+#             */
+/*   Updated: 2025/05/31 14:03:46 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-#include "ScalarConverter.hpp"
+#include "Serializer.hpp"
 
-int main(int ac, char** av)
+std::ostream &operator<<(std::ostream &out, const Data &data)
 {
-    (void) av;
-    if (ac != 2)
-        std::cout << "wrong number o arguments";
-    else
-        ScalarConverter::convert(av[1]);
-    return 0;
+	out << "[";
+	out << data.d_id << ", " << data.d_name << "]";
+	return (out);
+}
+
+int main()
+{
+	Data*    d;
+	d = new Data(123, "test");
+	d = Serializer::deserialize(Serializer::serialize(d));
+	std::cout << *d << std::endl;
+
+	delete d;
+	return (0);
 }

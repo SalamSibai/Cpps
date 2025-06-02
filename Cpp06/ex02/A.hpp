@@ -1,23 +1,20 @@
 /******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   A.hpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssibai <ssibai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/30 17:32:45 by ssibai            #+#    #+#             */
-/*   Updated: 2025/05/30 17:32:47 by ssibai           ###   ########.fr       */
+/*   Created: 2025/05/31 14:20:01 by ssibai            #+#    #+#             */
+/*   Updated: 2025/05/31 14:25:08 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-#include "ScalarConverter.hpp"
+#ifndef A_HPP
+#define A_HPP
 
-int main(int ac, char** av)
-{
-    (void) av;
-    if (ac != 2)
-        std::cout << "wrong number o arguments";
-    else
-        ScalarConverter::convert(av[1]);
-    return 0;
-}
+#include "Base.hpp"
+
+class A : public    Base {};
+
+#endif
