@@ -87,6 +87,10 @@
 		"complex": "cpp",
 		"mutex": "cpp",
 		"ratio": "cpp",
-		"stack": "cpp"
+		"stack": "cpp",
+		"list": "cpp",
+		"map": "cpp",
+		"set": "cpp",
+		"xtree": "cpp"
 	}
 }

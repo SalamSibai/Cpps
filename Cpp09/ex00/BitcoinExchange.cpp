@@ -26,45 +26,161 @@
  *
  */
 
- #include "BitcoinExchange.hpp"
+#include "BitcoinExchange.hpp"
 
 BitcoinExchange::BitcoinExchange()
 {
-	setDBContainer();
+	setContainer("data.csv", ',');
 }
 
-BitcoinExchange::BitcoinExchange(const BitcoinExchange& const)
-{
-	this->input = other.input;
-	this->db = other.db;
-}
+BitcoinExchange::BitcoinExchange(const BitcoinExchange& other) : db(other.db) {}
 
 BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& lhs)
 {
-	if (this != &other)
-	{
-		this->input = other.input;
-		this->db = other.db;
-	}
-	return this;
+	if (this != &lhs)
+		this->db = lhs.db;
+
+	return *this;
 }
 
 BitcoinExchange::~BitcoinExchange() {}
 
-void	BitcoinExchange::setInputContainer()
+void	BitcoinExchange::setContainer(const std::string f, char s)
 {
-	std::fstream file(std::string(fileName).c_str(), std::fstream::in);
-	std::stringstream stream;
-	std::string buff;
+	std::string		line;
+	std::fstream	file;
 
-	if (file.fail())
-		throw std::runtime_error("File does not exist");
-	
-	stream << file.rdbuf();
-	while (std::getline(stream, buff, '\n'))
+	Validator::validateFile(f, file);
+
+	std::getline(file, line);
+	Validator::validateHeader(line, s);
+	while (std::getline(file, line))
 	{
-		
+		std::stringstream linestream(line);
+		std::string	date_str, rate_str;
+
+		if (std::getline(linestream, date_str, s)
+			&& std::getline(linestream, rate_str))
+		{
+			Date d;
+			sscanf(date_str.c_str(), "%d-%d-%d", &d.year, &d.month, &d.day);
+			Validator::validateDate(d, s);
+			std::stringstream rate_stream(rate_str);
+			double rate;
+			rate_stream >> rate;
+			Validator::validateValue(rate, s);
+			db[d] = rate;
+		}
 	}
 }
 
+void	BitcoinExchange::getValue(const std::string input)
+{
+	std::string		line;
+	std::fstream	file;
+	Validator::validateFile(input, file);
 
+	std::getline(file, line);
+	Validator::validateHeader(line, '|');
+
+	while (std::getline(file, line))
+	{
+		std::stringstream linestream(line);
+		std::string	date_str, rate_str;
+
+		if (std::getline(linestream, date_str, '|')
+			&& std::getline(linestream, rate_str))
+		{
+			Date d;
+			sscanf(date_str.c_str(), "%d-%d-%d", &d.year, &d.month, &d.day);
+			if (!Validator::validateDate(d, '|'))
+				continue;
+			std::stringstream rate_stream(rate_str);
+			double rate;
+			rate_stream >> rate;
+			if (!Validator::validateValue(rate, '|'))
+				continue;
+			calculate(d, rate);
+		}
+		else
+			std::cerr << "Error: Bad input" << std::endl;
+	}
+}
+
+void	printResult()
+{
+
+}
+
+///////////////////////		Validator Class		///////////////////////
+
+bool	Validator::validateDate(Date d, char s)
+{
+	int daysInMonth[] = 
+		{ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	if (d.year < 1000 || d.year > 9999)
+	{
+		if (s == ',')
+			throw std::runtime_error("Error: Wrong date input format");
+		return (std::cerr << "Error: Wrong date format." << std::endl, false);
+	}
+	if (d.month < 1 || d.month > 12)
+	{
+		if (s == ',')
+			throw std::runtime_error("Error: Wrong date input format");
+		return (std::cerr << "Error: Wrong date format." << std::endl, false);
+	}
+	if (d.day < 1 || d.day > daysInMonth[d.month - 1])
+	{
+		if (s == ',')
+			throw std::runtime_error("Error: Wrong date input format");
+		return (std::cerr << "Error: Wrong date format." << std::endl, false);
+	}
+	return true;
+}
+
+bool	Validator::validateValue(double v, char s)
+{
+	if (v < 0)
+	{
+		if (s == ',')
+			throw	std::runtime_error("Error: invalid rate.");
+		return (std::cerr << "Error: not a positive number." << std::endl, false);
+	}
+	if (v > static_cast<double>(std::numeric_limits<int>::max()) ||
+		v < static_cast<double>(std::numeric_limits<int>::min()))
+	{
+		if (s == ',')
+			throw	std::runtime_error("Error: invalid rate.");
+		return (std::cerr << "Error: too large a number." << std::endl, false);
+	}
+	if (v > 1000 && s != ',')
+		return (std::cerr << "Error: too large a number." << std::endl, false);
+	return true;
+}
+
+void	Validator::validateHeader(const std::string line, char s)
+{
+	std::string header = line;
+	if (!header.empty() && header[header.size() - 1] == '\r')
+		header.erase(header.size() - 1);
+
+	if (s == ',')
+	{
+		if (header != "date,exchange_rate")
+			throw	std::runtime_error("Error: Data Header not found.");
+	}
+	else
+	{
+		if (header != "date | value")
+			throw	std::runtime_error("Error: Header not found.");
+	}
+}
+
+void	Validator::validateFile(const std::string fname, std::fstream& file)
+{
+	file.open(fname.c_str(), std::fstream::in);
+
+	if (file.fail())
+		throw std::runtime_error("Error: File does not exist");
+}

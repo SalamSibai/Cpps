@@ -16,9 +16,10 @@ int main(int ac, char** av)
 {
 	if (ac != 2)
 	{
-		std::cerr << "Wrong number of arguments.\n";
+		std::cerr <<"Error: Input file expected.\n";
 		return 1;
 	}
-	
+	BitcoinExchange bt;
+	bt.getValue(std::string(av[1]));
 	return 0;
 }

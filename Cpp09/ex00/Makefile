@@ -2,6 +2,7 @@
 NAME	=	btc
 
 FILES	=	main.cpp		\
+			BitcoinExchange.cpp
 
 CXX		=	c++
 

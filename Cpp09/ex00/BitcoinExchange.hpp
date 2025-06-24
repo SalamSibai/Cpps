@@ -18,6 +18,10 @@
 #include <map> 
 #include <sstream>
 #include <exception>
+#include <climits>
+#include <limits>
+
+class	Validator;
 
 struct Date
 {
@@ -31,13 +35,12 @@ struct Date
 		if (month != other.month) return month < other.month;
 		return day < other.day;
 	}
-}
+};
 
 class BitcoinExchange
 {
 	private:
-		std::map<Date, float>	input;
-		std::map<Date, float>	db;
+		std::map<Date, double>	db;
 
 	protected:
 	
@@ -47,13 +50,27 @@ class BitcoinExchange
 		BitcoinExchange& operator=(const BitcoinExchange& lhs);
 		~BitcoinExchange();
 
-		void	setInputContainer();
+		void	setContainer(const std::string input, char s);
 		void	setDBContainer();
 
-		void	calculate();
-		float	findValue();
-		const std::pair<Date, float>& findClosestDate();
+		void	calculate(Date date, double value);
+		void	getValue(const std::string input);
+		const 	std::pair<Date, double>& findClosestDate();
 		void	printResult();
+};
+
+class	Validator
+{
+	Validator();
+	Validator(const Validator& other);
+	Validator& operator=(const Validator& lhs);
+	~Validator();
+
+public:
+	static	bool	validateDate(Date d, char s);
+	static	bool	validateValue(double v, char s);
+	static	void	validateHeader(const std::string line, char s);
+	static	void	validateFile(const std::string fname, std::fstream& file);
 };
 
 #endif
