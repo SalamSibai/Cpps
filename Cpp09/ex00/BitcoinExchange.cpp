@@ -6,7 +6,7 @@
 /*   By: ssibai <ssibai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 12:08:20 by ssibai            #+#    #+#             */
-/*   Updated: 2025/06/22 16:22:10 by ssibai           ###   ########.fr       */
+/*   Updated: 2025/06/24 20:04:17 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -158,8 +158,16 @@ void	BitcoinExchange::getValue(const std::string input)
 
 void	BitcoinExchange::calculate(Date& date, double value)
 {
-	std::cout << date.year << "-" << date.month << "-" << date.day << " => "
-		<< value << " = " << value * findExchangeRate(date) << std::endl;
+	std::cout << date.year << "-";
+	if (date.month < 10)
+		std::cout << "0" << date.month << "-";
+	else
+		std::cout << date.month << "-";
+	if (date.day < 10)
+		std::cout << "0" << date.day << " => ";
+	else
+		std::cout << "0" << date.day << " => ";
+	std::cout << value << " = " << value * findExchangeRate(date) << std::endl;
 }
 
 double	BitcoinExchange::findExchangeRate(Date& d)
