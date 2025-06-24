@@ -30,7 +30,15 @@
 
 BitcoinExchange::BitcoinExchange()
 {
-	setContainer("data.csv", ',');
+	try
+	{
+		setContainer("data.csv", ',');
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << "Database cant be setup\n";
+		throw;
+	}
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& other) : db(other.db) {}
@@ -50,10 +58,26 @@ void	BitcoinExchange::setContainer(const std::string f, char s)
 	std::string		line;
 	std::fstream	file;
 
-	Validator::validateFile(f, file);
+	try
+	{
+		Validator::validateFile(f, file);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+		throw;
+	}
 
 	std::getline(file, line);
-	Validator::validateHeader(line, s);
+	try
+	{
+		Validator::validateHeader(line, s);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+		throw;
+	}
 	while (std::getline(file, line))
 	{
 		std::stringstream linestream(line);
@@ -64,11 +88,28 @@ void	BitcoinExchange::setContainer(const std::string f, char s)
 		{
 			Date d;
 			sscanf(date_str.c_str(), "%d-%d-%d", &d.year, &d.month, &d.day);
-			Validator::validateDate(d, s);
+			try
+			{
+				Validator::validateDate(d, s);
+			}
+			catch(const std::exception& e)
+			{
+				std::cerr << e.what() << '\n';
+				throw;
+			}
+			
 			std::stringstream rate_stream(rate_str);
 			double rate;
 			rate_stream >> rate;
-			Validator::validateValue(rate, s);
+			try
+			{
+				Validator::validateValue(rate, s);
+			}
+			catch(const std::exception& e)
+			{
+				std::cerr << e.what() << '\n';
+				throw;
+			}
 			db[d] = rate;
 		}
 	}
@@ -78,7 +119,15 @@ void	BitcoinExchange::getValue(const std::string input)
 {
 	std::string		line;
 	std::fstream	file;
-	Validator::validateFile(input, file);
+	try
+	{
+		Validator::validateFile(input, file);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+		throw;
+	}
 
 	std::getline(file, line);
 	Validator::validateHeader(line, '|');
