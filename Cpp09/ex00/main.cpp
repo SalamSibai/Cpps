@@ -19,7 +19,7 @@ int main(int ac, char** av)
 		std::cerr <<"Error: Input file expected.\n";
 		return 1;
 	}
-	
+
 	try
 	{
 		BitcoinExchange bt;
