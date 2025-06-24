@@ -42,8 +42,6 @@ class BitcoinExchange
 	private:
 		std::map<Date, double>	db;
 
-	protected:
-	
 	public:
 		BitcoinExchange();
 		BitcoinExchange(const BitcoinExchange& other);
@@ -51,12 +49,10 @@ class BitcoinExchange
 		~BitcoinExchange();
 
 		void	setContainer(const std::string input, char s);
-		void	setDBContainer();
 
-		void	calculate(Date date, double value);
+		void	calculate(Date& date, double value);
 		void	getValue(const std::string input);
-		const 	std::pair<Date, double>& findClosestDate();
-		void	printResult();
+			double findExchangeRate(Date& d);
 };
 
 class	Validator

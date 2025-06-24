@@ -103,13 +103,30 @@ void	BitcoinExchange::getValue(const std::string input)
 			calculate(d, rate);
 		}
 		else
-			std::cerr << "Error: Bad input" << std::endl;
+			std::cerr << "Error: Bad input => " <<  line << std::endl;
 	}
 }
 
-void	printResult()
+void	BitcoinExchange::calculate(Date& date, double value)
 {
+	std::cout << date.year << "-" << date.month << "-" << date.day << " => "
+		<< value << " = " << value * findExchangeRate(date) << std::endl;
+}
 
+double	BitcoinExchange::findExchangeRate(Date& d)
+{
+	if (db.count(d) == 1)
+		return (db.at(d));
+
+	double value = 0;
+	db[d] = 0;
+	std::map<Date, double>::iterator it = db.find(d);
+	if (it != db.begin())
+	{
+		value = (--it)->second;
+		db.erase(++it);
+	}
+	return value;
 }
 
 ///////////////////////		Validator Class		///////////////////////
