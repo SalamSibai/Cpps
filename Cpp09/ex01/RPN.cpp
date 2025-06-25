@@ -6,7 +6,7 @@
 /*   By: ssibai <ssibai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 20:20:51 by ssibai            #+#    #+#             */
-/*   Updated: 2025/06/24 20:25:43 by ssibai           ###   ########.fr       */
+/*   Updated: 2025/06/25 11:46:24 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -14,14 +14,15 @@
 
 RPN::RPN() {}
 
-RPN::RPN(const RPN& other) : result(other.result) {}
+RPN::RPN(const RPN& other) : nums(other.nums) {}
+
+RPN::~RPN() {}
 
 RPN&	RPN::operator=(const RPN& lhs)
 {
 	if (this != &lhs)
 	{
-		num = lhs.num;
-		result = lhs.result;
+		nums = lhs.nums;
 	}
 	return (*this);
 }
@@ -54,7 +55,7 @@ void		RPN::getResult(const std::string line)
 		if (isNumber(token))
 		{
 			long num = std::atol(token.c_str());
-			if (num > INT_MAX || num < INT_MIN)
+			if (num > std::numeric_limits<int>::max() || num < std::numeric_limits<int>::min())
 				throw std::runtime_error("Error: invalid number\n");
 			nums.push(num);
 		}
@@ -64,7 +65,7 @@ void		RPN::getResult(const std::string line)
 				throw std::runtime_error("Error: Invalid RPN");
 			try
 			{
-				calculate(token);
+				calculate(token[0]);
 			}
 			catch (const std::exception& e)
 			{
@@ -79,7 +80,7 @@ void		RPN::getResult(const std::string line)
 	std::cout << nums.top();
 }
 
-void	std::calculate(char token)
+void	RPN::calculate(char token)
 {
 	long	val;
 	int lhs = nums.top(); nums.pop();
@@ -100,14 +101,16 @@ void	std::calculate(char token)
 			
 		case '/':
 			if (rhs == 0)
-				throw std::runtime_error("Error: division by zero!\n")
+				throw std::runtime_error("Error: division by zero!\n");
 			val = rhs / lhs;
 			break;
 		default:
 			throw std::runtime_error("Error: invalid operator");
 	}
 
-	if (result > INT_MAX || result < INT_MIN)
+	if ( val <= std::numeric_limits<int>::max()
+		&& val >= std::numeric_limits<int>::min() )
+		nums.push(static_cast<int>(val));
+	else
 		throw std::runtime_error("Error: invalid value\n");
-	nums.push(static_cast<int>(val));
 }
