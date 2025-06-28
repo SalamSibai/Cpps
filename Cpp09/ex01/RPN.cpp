@@ -35,7 +35,7 @@ bool	RPN::isOperator(const std::string& token)
 
 bool	RPN::isNumber(const std::string& token)
 {
-	if (token.empty())  
+	if (token.empty())
 		return false;
 	for (std::size_t i = 0; i < token.size(); i++)
 	{
