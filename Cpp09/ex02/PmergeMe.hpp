@@ -33,9 +33,9 @@ class	PmergeMe
 		void	setContainer(const std::string input, T& cont);
 		void	fordJhonson(T& unsorted_list);
 		void	printContainer() const;
-		//find insertion order for 
+		void	isNumber(const std::string& input);
 };
 
-void	isNumber(const std::string& input);
+#include "PmergeMe.cpp"
 
 #endif

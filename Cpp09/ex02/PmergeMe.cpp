@@ -85,7 +85,8 @@ void	PmergeMe<T>::fordJhonson(T& unsorted_list)
 	(void) unsorted_list;
 }
 
-void	isNumber(const std::string& input)
+template<typename T>
+void	PmergeMe<T>::isNumber(const std::string& input)
 {
 	if (input.empty())
 		throw (std::runtime_error("Error: Empty string!\n"));
@@ -96,5 +97,5 @@ void	isNumber(const std::string& input)
 	}
 }
 
-template class PmergeMe<std::vector<int> >;
-template class PmergeMe<std::deque<int> >;
+// template class PmergeMe<std::vector<int> >;
+// template class PmergeMe<std::deque<int> >;
