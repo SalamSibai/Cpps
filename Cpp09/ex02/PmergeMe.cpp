@@ -96,6 +96,3 @@ void	PmergeMe<T>::isNumber(const std::string& input)
 			throw (std::runtime_error("Error: not numbers!\n"));
 	}
 }
-
-// template class PmergeMe<std::vector<int> >;
-// template class PmergeMe<std::deque<int> >;
