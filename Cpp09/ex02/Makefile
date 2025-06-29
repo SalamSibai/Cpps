@@ -1,9 +1,7 @@
 
 NAME	=	PmergeMe
 
-FILES	=	main.cpp		\
-			PmergeMe.cpp
-
+FILES	=	main.cpp
 CXX		=	c++
 
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98

@@ -18,6 +18,7 @@ int main(int ac, char **av)
 	}
 
 	PmergeMe<std::deque<int> > sorter;
+
 	try 
 	{
 		sorter.sort(input);
@@ -30,4 +31,4 @@ int main(int ac, char **av)
 	}
 
 	return 0;
-	}
+}

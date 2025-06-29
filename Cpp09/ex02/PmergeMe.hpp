@@ -31,7 +31,10 @@ class	PmergeMe
 
 		void	sort(const std::string input);
 		void	setContainer(const std::string input, T& cont);
-		void	fordJhonson(T& unsorted_list);
+		void	fordJhonson(T unsorted_list); 
+		void	split(T nums, T& followers, T& leaders);
+		void	merge(T unsorted_nums);
+		void	getJacobsthalIndices(size_t max, std::vector<int>& order);
 		void	printContainer() const;
 		void	isNumber(const std::string& input);
 };
