@@ -9,7 +9,7 @@
 #include <algorithm>
 #include <limits>
 #include <sstream>
-
+#include <ctime>
 
 /**
  * @brief 
@@ -20,7 +20,7 @@ template <typename T>
 class	PmergeMe
 {
 	private:
-		float	execution_time;
+		double	execution_time;
 		T		sorted_list;
 
 	public:
@@ -37,6 +37,8 @@ class	PmergeMe
 		void	getJacobsthalIndices(size_t max, std::vector<int>& order);
 		void	printContainer() const;
 		void	isNumber(const std::string& input);
+		float	getExecutionTime() const;
+		size_t	getSize() const;
 };
 
 #include "PmergeMe.cpp"

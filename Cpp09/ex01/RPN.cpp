@@ -76,7 +76,6 @@ void		RPN::getResult(const std::string line)
 		}
 		else
 		{
-
 			throw std::runtime_error("Error: Invalid RPN\n");
 		}
 	}

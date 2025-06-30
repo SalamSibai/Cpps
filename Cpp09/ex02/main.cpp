@@ -44,11 +44,11 @@ int main(int ac, char **av)
 	{
 		std::cout << "Before: " << input << "\n";
 		vector_sorter.sort(input);
-		std::cout << "After (with std::vectr): ";
+		std::cout << "After (with std::vector): ";
 		vector_sorter.printContainer();
 		
 		deque_sorter.sort(input);
-		std::cout << "After (with std::vectr): ";
+		std::cout << "After (with std::deque): ";
 		deque_sorter.printContainer();
 		
 		std::cout << "Time to process a range of " << vector_sorter.getSize() << " elements with std::vector : ";
@@ -58,7 +58,7 @@ int main(int ac, char **av)
 	}
 	catch(const std::exception& e) 
 	{
-		std::cerr << "Failed.";
+		std::cerr << "Failed.\n";
 		return 1;
 	}
 

@@ -35,6 +35,18 @@ void PmergeMe<T>::printContainer() const
 	std::cout << std::endl;
 }
 
+template <typename T>
+float PmergeMe<T>::getExecutionTime() const
+{
+	return execution_time;
+}
+
+template <typename T>
+size_t PmergeMe<T>::getSize() const
+{
+	return sorted_list.size();
+}
+
 template<typename T>
 void	PmergeMe<T>::setContainer(const std::string input, T& cont)
 {
@@ -66,7 +78,8 @@ void	PmergeMe<T>::sort(const std::string input)
 {
 	T	in_container;
 	sorted_list.clear();
-	
+
+	clock_t start = clock();
 	try
 	{
 		setContainer(input, in_container);
@@ -78,6 +91,8 @@ void	PmergeMe<T>::sort(const std::string input)
 	}
 
 	fordJhonson(in_container);
+	clock_t end = clock();
+	execution_time = static_cast<double>(end - start) * 1000000.0 / CLOCKS_PER_SEC;
 }
 
 /**
