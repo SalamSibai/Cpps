@@ -37,7 +37,16 @@ bool	RPN::isNumber(const std::string& token)
 {
 	if (token.empty())
 		return false;
-	for (std::size_t i = 0; i < token.size(); i++)
+
+	std::size_t i = 0;
+	if (token[0] == '-' || token[0] == '+') 
+	{
+		if (token.size() == 1)
+			return false;
+		i = 1;
+	}
+
+	for (; i < token.size(); i++) 
 	{
 		if (!std::isdigit(token[i])) 
 			return false;
@@ -62,22 +71,18 @@ void		RPN::getResult(const std::string line)
 		else if (isOperator(token))
 		{
 			if (nums.size() < 2)
-				throw std::runtime_error("Error: Invalid RPN");
-			try
-			{
-				calculate(token[0]);
-			}
-			catch (const std::exception& e)
-			{
-				return ;
-			}
+				throw std::runtime_error("Error: Invalid RPN\n");
+			calculate(token[0]);
 		}
 		else
-			throw std::runtime_error("Error: Invalid RPN");
+		{
+
+			throw std::runtime_error("Error: Invalid RPN\n");
+		}
 	}
 	if (nums.size() != 1)
-		throw std::runtime_error("Error: invalid RPN expression");
-	std::cout << nums.top();
+		throw std::runtime_error("Error: invalid RPN expression\n");
+	std::cout << nums.top() << std::endl;
 }
 
 void	RPN::calculate(char token)
@@ -100,12 +105,12 @@ void	RPN::calculate(char token)
 			break;
 			
 		case '/':
-			if (rhs == 0)
+			if (lhs == 0)
 				throw std::runtime_error("Error: division by zero!\n");
 			val = rhs / lhs;
 			break;
 		default:
-			throw std::runtime_error("Error: invalid operator");
+			throw std::runtime_error("Error: invalid operator\n");
 	}
 
 	if ( val <= std::numeric_limits<int>::max()
