@@ -38,7 +38,7 @@ void PmergeMe<T>::printContainer() const
 template <typename T>
 double PmergeMe<T>::getExecutionTime() const
 {
-	return execution_time;
+	return execution_time / 1000000.0;
 }
 
 template <typename T>
@@ -71,6 +71,8 @@ void	PmergeMe<T>::setContainer(const std::string input, T& cont)
 			throw;
 		}
 	}
+	if (cont.empty())
+		throw std::runtime_error("Error: container is empty after parsing input.\n");
 }
 
 template<typename T>
@@ -79,20 +81,20 @@ void	PmergeMe<T>::sort(const std::string input)
 	T	in_container;
 	sorted_list.clear();
 
-	clock_t start = clock();
 	try
 	{
 		setContainer(input, in_container);
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << "Container can't be setup\n";
+		std::cerr << e.what() << "Error: Container can't be setup\n";
 		throw;
 	}
 
+	clock_t start = clock();
 	fordJhonson(in_container);
 	clock_t end = clock();
-	execution_time = (static_cast<double>(end - start) * 1000000.0) / CLOCKS_PER_SEC;
+	execution_time = static_cast<double>(end - start) * 1000000.0 / CLOCKS_PER_SEC;
 }
 
 /**

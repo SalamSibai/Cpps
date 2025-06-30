@@ -6,7 +6,7 @@
 /*   By: ssibai <ssibai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 17:00:56 by ssibai            #+#    #+#             */
-/*   Updated: 2025/06/30 17:00:58 by ssibai           ###   ########.fr       */
+/*   Updated: 2025/06/30 19:44:30 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -30,31 +30,33 @@ int main(int ac, char **av)
 		return 1;
 	}
 
-	std::string input;
-	for (int i = 1; i < ac; ++i) 
-	{
-		input += av[i];
-		if (i < ac - 1)
-			input += " ";
-	}
 
-	PmergeMe<std::deque<int> > deque_sorter;
-	PmergeMe<std::vector<int> > vector_sorter;
 	try 
 	{
-		std::cout << "Before: " << input << "\n";
+		std::string input;
+		for (int i = 1; i < ac; ++i) 
+		{
+			input += av[i];
+			if (i < ac - 1)
+				input += " ";
+		}
+	
+		PmergeMe<std::deque<int> > deque_sorter;
+		PmergeMe<std::vector<int> > vector_sorter;
+		
 		vector_sorter.sort(input);
+		std::cout << "Before: " << input << "\n";
 		std::cout << "After (with std::vector): ";
 		vector_sorter.printContainer();
 		
 		deque_sorter.sort(input);
-		std::cout << "After (with std::deque): ";
+		std::cout << "After (with std::deque):  ";
 		deque_sorter.printContainer();
 		
 		std::cout << "Time to process a range of " << vector_sorter.getSize() << " elements with std::vector : ";
-		std::cout << vector_sorter.getExecutionTime() << " us\n";
+		std::cout << std::fixed << std::setprecision(6) << vector_sorter.getExecutionTime() << " us\n";
 		std::cout << "Time to process a range of " << deque_sorter.getSize() << " elements with std::deque  : ";
-		std::cout << deque_sorter.getExecutionTime() << " us\n";
+		std::cout << std::fixed << std::setprecision(6) << deque_sorter.getExecutionTime() << " us\n";
 	}
 	catch(const std::exception& e) 
 	{
