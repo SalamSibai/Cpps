@@ -37,7 +37,7 @@ class	PmergeMe
 		void	getJacobsthalIndices(size_t max, std::vector<int>& order);
 		void	printContainer() const;
 		void	isNumber(const std::string& input);
-		float	getExecutionTime() const;
+		double	getExecutionTime() const;
 		size_t	getSize() const;
 };
 

@@ -36,7 +36,7 @@ void PmergeMe<T>::printContainer() const
 }
 
 template <typename T>
-float PmergeMe<T>::getExecutionTime() const
+double PmergeMe<T>::getExecutionTime() const
 {
 	return execution_time;
 }
@@ -92,7 +92,7 @@ void	PmergeMe<T>::sort(const std::string input)
 
 	fordJhonson(in_container);
 	clock_t end = clock();
-	execution_time = static_cast<double>(end - start) * 1000000.0 / CLOCKS_PER_SEC;
+	execution_time = (static_cast<double>(end - start) * 1000000.0) / CLOCKS_PER_SEC;
 }
 
 /**
