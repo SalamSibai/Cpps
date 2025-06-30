@@ -6,7 +6,7 @@
 /*   By: ssibai <ssibai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 20:20:51 by ssibai            #+#    #+#             */
-/*   Updated: 2025/06/25 11:46:24 by ssibai           ###   ########.fr       */
+/*   Updated: 2025/06/30 19:50:32 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -75,9 +75,7 @@ void		RPN::getResult(const std::string line)
 			calculate(token[0]);
 		}
 		else
-		{
 			throw std::runtime_error("Error: Invalid RPN\n");
-		}
 	}
 	if (nums.size() != 1)
 		throw std::runtime_error("Error: invalid RPN expression\n");

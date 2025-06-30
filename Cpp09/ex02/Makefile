@@ -4,7 +4,7 @@ NAME	=	PmergeMe
 FILES	=	main.cpp
 CXX		=	c++
 
-CXXFLAGS = -Wall -Werror -Wextra -std=c++98 -fsanitize=address -g3
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 
 OBJS = $(FILES:.cpp=.o)
 
