@@ -6,7 +6,7 @@
 /*   By: ssibai <ssibai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 10:22:54 by ssibai            #+#    #+#             */
-/*   Updated: 2025/06/22 16:25:34 by ssibai           ###   ########.fr       */
+/*   Updated: 2025/06/30 21:43:39 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -67,6 +67,7 @@ public:
 	static	bool	validateValue(double v, char s);
 	static	void	validateHeader(const std::string line, char s);
 	static	void	validateFile(const std::string fname, std::fstream& file);
+	static	void	validateNumberFormat(const std::string& str);
 };
 
 #endif

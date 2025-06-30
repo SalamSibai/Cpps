@@ -6,7 +6,7 @@
 /*   By: ssibai <ssibai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 12:08:20 by ssibai            #+#    #+#             */
-/*   Updated: 2025/06/24 20:04:17 by ssibai           ###   ########.fr       */
+/*   Updated: 2025/06/30 22:00:51 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -83,16 +83,45 @@ void	BitcoinExchange::setContainer(const std::string f, char s)
 		std::stringstream linestream(line);
 		std::string	date_str, rate_str;
 
+		if (std::count(line.begin(), line.end(), s) != 1)
+			throw std::runtime_error("");
 		if (std::getline(linestream, date_str, s)
 			&& std::getline(linestream, rate_str))
 		{
 			Date d;
-			sscanf(date_str.c_str(), "%d-%d-%d", &d.year, &d.month, &d.day);
+			
+			std::stringstream date_stream(date_str);
+			std::string year_str, month_str, day_str;
+
+			if (std::getline(date_stream, year_str, '-') &&
+				std::getline(date_stream, month_str, '-') &&
+				std::getline(date_stream, day_str))
+			{
+				std::stringstream(year_str) >> d.year;
+				std::stringstream(month_str) >> d.month;
+				std::stringstream(day_str) >> d.day;
+			}
+			else
+			{
+				std::cerr << "Error: Bad date format => " << date_str << std::endl;
+				continue;
+			}
+			
 			try
 			{
 				Validator::validateDate(d, s);
 			}
 			catch(const std::exception& e)
+			{
+				std::cerr << e.what() << '\n';
+				throw;
+			}
+
+			try
+			{
+				Validator::validateNumberFormat(rate_str);
+			}
+			catch (const std::exception& e)
 			{
 				std::cerr << e.what() << '\n';
 				throw;
@@ -137,16 +166,43 @@ void	BitcoinExchange::getValue(const std::string input)
 		std::stringstream linestream(line);
 		std::string	date_str, rate_str;
 
+		if (std::count(line.begin(), line.end(), '|') != 1)
+		{
+			std::cerr << "Error: bad input => " << line << std::endl;
+			continue;
+		}
 		if (std::getline(linestream, date_str, '|')
 			&& std::getline(linestream, rate_str))
 		{
 			Date d;
-			sscanf(date_str.c_str(), "%d-%d-%d", &d.year, &d.month, &d.day);
+
+			std::stringstream date_stream(date_str);
+			std::string year_str, month_str, day_str;
+
+			if (std::getline(date_stream, year_str, '-') &&
+				std::getline(date_stream, month_str, '-') &&
+				std::getline(date_stream, day_str))
+			{
+				std::stringstream(year_str) >> d.year;
+				std::stringstream(month_str) >> d.month;
+				std::stringstream(day_str) >> d.day;
+			}
+			else
+			{
+				std::cerr << "Error: Bad date format => " << date_str << std::endl;
+				continue;
+			}
+			
 			if (!Validator::validateDate(d, '|'))
 				continue;
+
+
+			Validator::validateNumberFormat(rate_str);
+			
 			std::stringstream rate_stream(rate_str);
 			double rate;
 			rate_stream >> rate;
+			
 			if (!Validator::validateValue(rate, '|'))
 				continue;
 			calculate(d, rate);
@@ -257,4 +313,37 @@ void	Validator::validateFile(const std::string fname, std::fstream& file)
 
 	if (file.fail())
 		throw std::runtime_error("Error: File does not exist");
+}
+
+void Validator::validateNumberFormat(const std::string& str)
+{
+	std::string::size_type i = 0;
+
+	while (i < str.size() && std::isspace(str[i]))
+		++i;
+
+	if (i < str.size() && (str[i] == '+' || str[i] == '-'))
+        ++i;
+	bool hasDot = false;
+	for (; i < str.size(); ++i)
+	{
+		char c = str[i];
+
+		if (std::isspace(c))
+			break;
+
+		if (!std::isdigit(c))
+		{
+			if (c == '.' && !hasDot)
+				hasDot = true;
+			else
+				throw std::runtime_error("Error: bad value format => " + str);
+		}
+	}
+
+	for (; i < str.size(); ++i)
+	{
+		if (!std::isspace(str[i]))
+			throw std::runtime_error("Error: bad value format => " + str);
+	}
 }
