@@ -6,7 +6,7 @@
 /*   By: ssibai <ssibai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 12:08:20 by ssibai            #+#    #+#             */
-/*   Updated: 2025/06/30 22:00:51 by ssibai           ###   ########.fr       */
+/*   Updated: 2025/07/01 17:41:57 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -97,6 +97,10 @@ void	BitcoinExchange::setContainer(const std::string f, char s)
 				std::getline(date_stream, month_str, '-') &&
 				std::getline(date_stream, day_str))
 			{
+				if (std::count_if(year_str.begin(), year_str.end(), ::isdigit) != 4
+					|| std::count_if(month_str.begin(), month_str.end(), ::isdigit) != 2
+					|| std::count_if(day_str.begin(), day_str.end(), ::isdigit) != 2)
+					std::cout << "what!\n";
 				std::stringstream(year_str) >> d.year;
 				std::stringstream(month_str) >> d.month;
 				std::stringstream(day_str) >> d.day;
@@ -179,9 +183,13 @@ void	BitcoinExchange::getValue(const std::string input)
 			std::stringstream date_stream(date_str);
 			std::string year_str, month_str, day_str;
 
-			if (std::getline(date_stream, year_str, '-') &&
-				std::getline(date_stream, month_str, '-') &&
-				std::getline(date_stream, day_str))
+			if (std::getline(date_stream, year_str, '-') 
+				&& std::getline(date_stream, month_str, '-') 
+				&& std::getline(date_stream, day_str, ' ') 
+				&& std::count_if(year_str.begin(), year_str.end(), ::isdigit) == static_cast<long>(year_str.size())
+				&& std::count_if(month_str.begin(), month_str.end(), ::isdigit) == static_cast<long>(month_str.size())
+				&& std::count_if(day_str.begin(), day_str.end(), ::isdigit) == static_cast<long>(day_str.size()))	
+		
 			{
 				std::stringstream(year_str) >> d.year;
 				std::stringstream(month_str) >> d.month;
