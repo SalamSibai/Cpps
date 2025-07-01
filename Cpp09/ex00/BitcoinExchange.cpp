@@ -6,7 +6,7 @@
 /*   By: ssibai <ssibai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 12:08:20 by ssibai            #+#    #+#             */
-/*   Updated: 2025/07/01 18:07:51 by ssibai           ###   ########.fr       */
+/*   Updated: 2025/07/01 18:16:12 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -61,83 +61,54 @@ void	BitcoinExchange::setContainer(const std::string f, char s)
 	try
 	{
 		Validator::validateFile(f, file);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-		throw;
-	}
-
-	std::getline(file, line);
-	try
-	{
+		std::getline(file, line);
 		Validator::validateHeader(line, s);
+		while (std::getline(file, line))
+		{
+			std::stringstream linestream(line);
+			std::string	date_str, rate_str;
+
+			if (std::count(line.begin(), line.end(), s) != 1)
+				throw std::runtime_error("");
+			if (std::getline(linestream, date_str, s)
+				&& std::getline(linestream, rate_str))
+			{
+				Date d;
+				
+				std::stringstream date_stream(date_str);
+				std::string year_str, month_str, day_str;
+
+				if (std::getline(date_stream, year_str, '-')
+					&& std::getline(date_stream, month_str, '-')
+					&& std::getline(date_stream, day_str)
+					&& std::count_if(year_str.begin(), year_str.end(), ::isdigit) == static_cast<long>(year_str.size())
+					&& std::count_if(month_str.begin(), month_str.end(), ::isdigit) == static_cast<long>(month_str.size())
+					&& std::count_if(day_str.begin(), day_str.end(), ::isdigit) == static_cast<long>(day_str.size()))
+				{
+					std::stringstream(year_str) >> d.year;
+					std::stringstream(month_str) >> d.month;
+					std::stringstream(day_str) >> d.day;
+				}
+				else
+					throw std::runtime_error("Bad date format.");
+
+				Validator::validateDate(d, s);
+
+				if (!Validator::validateNumberFormat(rate_str))
+					throw std::runtime_error("Error: Wrong value format.");
+
+				std::stringstream rate_stream(rate_str);
+				double rate;
+				rate_stream >> rate;
+				Validator::validateValue(rate, s);
+				db[d] = rate;
+			}
+		}
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << '\n';
 		throw;
-	}
-	while (std::getline(file, line))
-	{
-		std::stringstream linestream(line);
-		std::string	date_str, rate_str;
-
-		if (std::count(line.begin(), line.end(), s) != 1)
-			throw std::runtime_error("");
-		if (std::getline(linestream, date_str, s)
-			&& std::getline(linestream, rate_str))
-		{
-			Date d;
-			
-			std::stringstream date_stream(date_str);
-			std::string year_str, month_str, day_str;
-
-			if (std::getline(date_stream, year_str, '-') &&
-				std::getline(date_stream, month_str, '-') &&
-				std::getline(date_stream, day_str))
-			{
-				if (std::count_if(year_str.begin(), year_str.end(), ::isdigit) != 4
-					|| std::count_if(month_str.begin(), month_str.end(), ::isdigit) != 2
-					|| std::count_if(day_str.begin(), day_str.end(), ::isdigit) != 2)
-					std::cout << "what!\n";
-				std::stringstream(year_str) >> d.year;
-				std::stringstream(month_str) >> d.month;
-				std::stringstream(day_str) >> d.day;
-			}
-			else
-			{
-				std::cerr << "Error: Bad date format => " << date_str << std::endl;
-				continue;
-			}
-			
-			try
-			{
-				Validator::validateDate(d, s);
-			}
-			catch(const std::exception& e)
-			{
-				std::cerr << e.what() << '\n';
-				throw;
-			}
-
-			if (!Validator::validateNumberFormat(rate_str))
-				throw std::runtime_error("Error: Wrong value format.\n");
-			
-			std::stringstream rate_stream(rate_str);
-			double rate;
-			rate_stream >> rate;
-			try
-			{
-				Validator::validateValue(rate, s);
-			}
-			catch(const std::exception& e)
-			{
-				std::cerr << e.what() << '\n';
-				throw;
-			}
-			db[d] = rate;
-		}
 	}
 }
 
@@ -170,7 +141,7 @@ void	BitcoinExchange::getValue(const std::string input)
 		}
 		if (std::getline(linestream, date_str, ' ')
 			&& std::getline(linestream, thing, '|') && thing.empty()
-			&& std::getline(linestream, rate_str) && rate_str[0] == ' ')
+			&& std::getline(linestream, rate_str))
 		{
 
 			Date d;
