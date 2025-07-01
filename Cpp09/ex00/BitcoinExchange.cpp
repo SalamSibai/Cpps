@@ -6,7 +6,7 @@
 /*   By: ssibai <ssibai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 12:08:20 by ssibai            #+#    #+#             */
-/*   Updated: 2025/07/01 17:55:10 by ssibai           ###   ########.fr       */
+/*   Updated: 2025/07/01 18:07:51 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -121,15 +121,8 @@ void	BitcoinExchange::setContainer(const std::string f, char s)
 				throw;
 			}
 
-			try
-			{
-				Validator::validateNumberFormat(rate_str);
-			}
-			catch (const std::exception& e)
-			{
-				std::cerr << e.what() << '\n';
-				throw;
-			}
+			if (!Validator::validateNumberFormat(rate_str))
+				throw std::runtime_error("Error: Wrong value format.\n");
 			
 			std::stringstream rate_stream(rate_str);
 			double rate;
@@ -168,7 +161,7 @@ void	BitcoinExchange::getValue(const std::string input)
 	while (std::getline(file, line))
 	{
 		std::stringstream linestream(line);
-		std::string	date_str, rate_str, thing, thing_two;
+		std::string	date_str, rate_str, thing;
 
 		if (std::count(line.begin(), line.end(), '|') != 1)
 		{
@@ -177,8 +170,7 @@ void	BitcoinExchange::getValue(const std::string input)
 		}
 		if (std::getline(linestream, date_str, ' ')
 			&& std::getline(linestream, thing, '|') && thing.empty()
-			&& std::getline(linestream, thing_two, ' ')
-			&& std::getline(linestream, rate_str))
+			&& std::getline(linestream, rate_str) && rate_str[0] == ' ')
 		{
 
 			Date d;
@@ -206,8 +198,8 @@ void	BitcoinExchange::getValue(const std::string input)
 			if (!Validator::validateDate(d, '|'))
 				continue;
 
-
-			Validator::validateNumberFormat(rate_str);
+			if (!Validator::validateNumberFormat(rate_str))
+				continue;
 			
 			std::stringstream rate_stream(rate_str);
 			double rate;
@@ -325,12 +317,22 @@ void	Validator::validateFile(const std::string fname, std::fstream& file)
 		throw std::runtime_error("Error: File does not exist");
 }
 
-void Validator::validateNumberFormat(const std::string& str)
+bool Validator::validateNumberFormat(const std::string& str)
 {
 	std::string::size_type i = 0;
+	int	lspace = 0;
 
 	while (i < str.size() && std::isspace(str[i]))
+	{
 		++i;
+		++lspace;
+	}
+
+	if (lspace > 1)
+	{
+		std::cerr<< "Error: bad value format => " << str << "\n";
+		return false;
+	}
 
 	if (i < str.size() && (str[i] == '+' || str[i] == '-'))
         ++i;
@@ -347,13 +349,20 @@ void Validator::validateNumberFormat(const std::string& str)
 			if (c == '.' && !hasDot)
 				hasDot = true;
 			else
-				throw std::runtime_error("Error: bad value format => " + str);
+			{
+				std::cerr<< "Error: bad value format => " << str << "\n";
+				return false;
+			}
 		}
 	}
 
 	for (; i < str.size(); ++i)
 	{
 		if (!std::isspace(str[i]))
-			throw std::runtime_error("Error: bad value format => " + str);
+		{
+			std::cerr<< "Error: bad value format => " << str << "\n";
+			return false;
+		}
 	}
+	return true;
 }
