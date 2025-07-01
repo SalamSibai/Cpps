@@ -6,7 +6,7 @@
 /*   By: ssibai <ssibai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 12:08:20 by ssibai            #+#    #+#             */
-/*   Updated: 2025/07/01 17:41:57 by ssibai           ###   ########.fr       */
+/*   Updated: 2025/07/01 17:55:10 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -168,16 +168,19 @@ void	BitcoinExchange::getValue(const std::string input)
 	while (std::getline(file, line))
 	{
 		std::stringstream linestream(line);
-		std::string	date_str, rate_str;
+		std::string	date_str, rate_str, thing, thing_two;
 
 		if (std::count(line.begin(), line.end(), '|') != 1)
 		{
 			std::cerr << "Error: bad input => " << line << std::endl;
 			continue;
 		}
-		if (std::getline(linestream, date_str, '|')
+		if (std::getline(linestream, date_str, ' ')
+			&& std::getline(linestream, thing, '|') && thing.empty()
+			&& std::getline(linestream, thing_two, ' ')
 			&& std::getline(linestream, rate_str))
 		{
+
 			Date d;
 
 			std::stringstream date_stream(date_str);
@@ -189,7 +192,6 @@ void	BitcoinExchange::getValue(const std::string input)
 				&& std::count_if(year_str.begin(), year_str.end(), ::isdigit) == static_cast<long>(year_str.size())
 				&& std::count_if(month_str.begin(), month_str.end(), ::isdigit) == static_cast<long>(month_str.size())
 				&& std::count_if(day_str.begin(), day_str.end(), ::isdigit) == static_cast<long>(day_str.size()))	
-		
 			{
 				std::stringstream(year_str) >> d.year;
 				std::stringstream(month_str) >> d.month;
