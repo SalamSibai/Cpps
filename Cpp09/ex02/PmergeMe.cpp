@@ -1,3 +1,14 @@
+/******************************************************************************/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PmergeMe.cpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ssibai <ssibai@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/01 21:37:09 by ssibai            #+#    #+#             */
+/*   Updated: 2025/07/01 21:37:40 by ssibai           ###   ########.fr       */
+/*                                                                            */
+/******************************************************************************/
 
 #include "PmergeMe.hpp"
 
@@ -107,8 +118,7 @@ void	PmergeMe<T>::sort(const std::string input)
 		1)	Separate the list into pairs.
 		2)	Create a "leaders" container, where the largest
 			element of every pair is placed, in its correct spot
-			(accumulates each time)	
-		
+			(accumulates each time)
  */
 template<typename T>
 void	PmergeMe<T>::fordJhonson(T unsorted_list)
@@ -180,8 +190,10 @@ void	PmergeMe<T>::split(T nums, T& followers, T& leaders)
  */
 template<typename T>
 void	PmergeMe<T>::merge(T unsorted_nums)
+
 {
 	std::vector<int> order;
+
 	getJacobsthalIndices(unsorted_nums.size(), order);
 
 	for (std::size_t i = 0; i < order.size(); ++i)

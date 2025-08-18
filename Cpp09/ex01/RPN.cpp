@@ -6,7 +6,7 @@
 /*   By: ssibai <ssibai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 20:20:51 by ssibai            #+#    #+#             */
-/*   Updated: 2025/06/30 19:50:32 by ssibai           ###   ########.fr       */
+/*   Updated: 2025/07/01 20:12:43 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -84,9 +84,9 @@ void		RPN::getResult(const std::string line)
 
 void	RPN::calculate(char token)
 {
-	long	val;
-	int lhs = nums.top(); nums.pop();
-	int rhs = nums.top(); nums.pop();
+	long 	val;
+	long  	lhs = nums.top(); nums.pop();
+	long  	rhs = nums.top(); nums.pop();
 	switch(token)
 	{
 		case '+':

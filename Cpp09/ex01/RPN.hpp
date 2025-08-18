@@ -6,7 +6,7 @@
 /*   By: ssibai <ssibai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 20:20:55 by ssibai            #+#    #+#             */
-/*   Updated: 2025/06/25 11:44:30 by ssibai           ###   ########.fr       */
+/*   Updated: 2025/07/01 20:12:31 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -20,7 +20,7 @@
 #include <sstream>
 #include <exception>
 #include <cstdlib>
-
+#include <iomanip>
 /**
 How it wokrs:
 

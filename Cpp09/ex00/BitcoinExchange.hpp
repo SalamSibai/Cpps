@@ -6,7 +6,7 @@
 /*   By: ssibai <ssibai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 10:22:54 by ssibai            #+#    #+#             */
-/*   Updated: 2025/07/01 18:05:58 by ssibai           ###   ########.fr       */
+/*   Updated: 2025/07/01 19:52:41 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -20,6 +20,7 @@
 #include <exception>
 #include <climits>
 #include <limits>
+#include <iomanip>
 
 class	Validator;
 

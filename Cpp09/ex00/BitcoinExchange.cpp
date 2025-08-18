@@ -6,7 +6,7 @@
 /*   By: ssibai <ssibai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 12:08:20 by ssibai            #+#    #+#             */
-/*   Updated: 2025/07/01 18:16:12 by ssibai           ###   ########.fr       */
+/*   Updated: 2025/07/01 19:53:26 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -195,8 +195,8 @@ void	BitcoinExchange::calculate(Date& date, double value)
 	if (date.day < 10)
 		std::cout << "0" << date.day << " => ";
 	else
-		std::cout << "0" << date.day << " => ";
-	std::cout << value << " = " << value * findExchangeRate(date) << std::endl;
+		std::cout << date.day << " => ";
+	std::cout << value << " = " << std::fixed << std::setprecision(2) << value * findExchangeRate(date) << std::endl;
 }
 
 double	BitcoinExchange::findExchangeRate(Date& d)
