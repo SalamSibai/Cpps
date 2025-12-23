@@ -61,7 +61,6 @@ size_t PmergeMe<T>::getSize() const
 template<typename T>
 void	PmergeMe<T>::setContainer(const std::string input, T& cont)
 {
-	
 	std::stringstream ss(input);
 	std::string token;
 
